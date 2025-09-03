@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wish và If-only - Cách diễn đạt ước muốn</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      header {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 2.5rem 0;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        opacity: 0.9;
+      }
+
+      nav {
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-link {
+        padding: 1rem 1.5rem;
+        display: inline-block;
+        color: #6a11cb;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: #f0f4ff;
+        color: #2575fc;
+      }
+
+      section {
+        padding: 3.5rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        color: #6a11cb;
+        margin-bottom: 2.5rem;
+        font-size: 2.2rem;
+        position: relative;
+      }
+
+      .section-title:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        margin: 10px auto;
+        border-radius: 2px;
+      }
+
+      .intro-text {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2.5rem;
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+
+      .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-header {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .card-body {
+        padding: 1.8rem;
+      }
+
+      .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+        color: #6a11cb;
+      }
+
+      .example {
+        background-color: #f8f9fa;
+        border-left: 4px solid #6a11cb;
+        padding: 1.2rem;
+        margin: 1.2rem 0;
+        font-style: italic;
+        border-radius: 0 4px 4px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2.5rem 0;
+        background-color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 1.2rem;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      th {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        font-weight: 500;
+      }
+
+      tr:hover {
+        background-color: #f8f9fa;
+      }
+
+      .quiz-container {
+        background-color: white;
+        border-radius: 12px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        margin: 2.5rem auto;
+        max-width: 800px;
+      }
+
+      .question {
+        margin-bottom: 1.8rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .question:last-child {
+        border-bottom: none;
+      }
+
+      .options label {
+        display: block;
+        padding: 0.8rem;
+        margin: 0.5rem 0;
+        background-color: #f8f9fa;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .options label:hover {
+        background-color: #eef2ff;
+      }
+
+      button {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: block;
+        margin: 1.5rem auto 0;
+        box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3);
+      }
+
+      button:hover {
+        opacity: 0.95;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(106, 17, 203, 0.4);
+      }
+
+      .highlight {
+        background-color: #fff8e1;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-weight: 600;
+        color: #ff6f00;
+      }
+
+      footer {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        text-align: center;
+        padding: 2.5rem 0;
+        margin-top: 3.5rem;
+      }
+
+      .footer-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 768px) {
+        .card-container {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .nav-link {
+          padding: 0.8rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Wish và If-only</h1>
+        <p class="subtitle">
+          Cách diễn đạt ước muốn và tình huống giả định trong tiếng Anh
+        </p>
+      </div>
+    </header>
+
+    <nav>
+      <div class="container nav-container">
+        <a href="#intro" class="nav-link">Giới thiệu</a>
+        <a href="#wish" class="nav-link">Cấu trúc Wish</a>
+        <a href="#if-only" class="nav-link">Cấu trúc If-only</a>
+        <a href="#compare" class="nav-link">So sánh</a>
+        <a href="#examples" class="nav-link">Ví dụ</a>
+        <a href="#quiz" class="nav-link">Bài tập</a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section id="intro">
+        <h2 class="section-title">Wish và If-only là gì?</h2>
+        <p class="intro-text">
+          "Wish" và "If-only" là hai cấu trúc quan trọng trong tiếng Anh dùng để
+          diễn đạt những ước muốn, sự hối tiếc về những điều không có thật hoặc
+          khó xảy ra trong hiện tại, quá khứ và tương lai. Chúng thường được sử
+          dụng trong các câu điều kiện và thể hiện sự giả định.
+        </p>
+
+        <div class="card-container">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Đặc điểm chung</h3>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Diễn tả ước muốn về điều không có thật hoặc khó xảy ra</li>
+                <li>Thể hiện sự hối tiếc về những điều trong quá khứ</li>
+                <li>Diễn đạt mong muốn thay đổi tình huống hiện tại</li>
+                <li>
+                  Thường sử dụng thì quá khứ trong mệnh đề sau wish/if-only
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Công thức chung</h3>
+            </div>
+            <div class="card-body">
+              <p><strong>Wish:</strong> S + wish + (that) + mệnh đề</p>
+              <p class="example">I wish (that) I had more free time.</p>
+
+              <p><strong>If only:</strong> If only + mệnh đề</p>
+              <p class="example">If only I knew the answer.</p>
+
+              <p class="example">
+                Lưu ý: "If only" thường mang tính cảm thán mạnh hơn "wish"
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="wish">
+        <h2 class="section-title">Cấu trúc Wish chi tiết</h2>
+
+        <div class="card-container">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Wish ở hiện tại</h3>
+            </div>
+            <div class="card-body">
+              <p>Diễn tả ước muốn về một điều không có thật ở hiện tại</p>
+              <p>
+                <strong>Công thức:</strong> S + wish + S + V-ed (past simple)
+              </p>
+              <p class="example">
+                - I wish I <span class="highlight">lived</span> in Paris.<br />-
+                She wishes she <span class="highlight">had</span> a car.
+              </p>
+              <p>
+                Động từ "to be" thường được chia là "were" cho tất cả các ngôi
+              </p>
+              <p class="example">
+                I wish I <span class="highlight">were</span> taller.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Wish ở quá khứ</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                Diễn tả ước muốn, sự hối tiếc về một điều đã xảy ra trong quá
+                khứ
+              </p>
+              <p>
+                <strong>Công thức:</strong> S + wish + S + had + V3 (past
+                perfect)
+              </p>
+              <p class="example">
+                - I wish I <span class="highlight">had studied</span> harder for
+                the exam.<br />- He wishes he
+                <span class="highlight">hadn't said</span> those words.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Wish ở tương lai</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                Diễn tả ước muốn về một điều trong tương lai hoặc mong muốn ai
+                đó làm gì
+              </p>
+              <p><strong>Công thức:</strong> S + wish + S + would/could + V</p>
+              <p class="example">
+                - I wish it
+                <span class="highlight">would stop</span> raining.<br />- She
+                wishes her brother
+                <span class="highlight">would visit</span> her more often.
+              </p>
+              <p>
+                Lưu ý: Không dùng "would" khi chủ ngữ của mệnh đề wish và mệnh
+                đề sau wish giống nhau
+              </p>
+              <p class="example">
+                I wish I <span class="highlight">could</span> speak French.
+                (NOT: I wish I would speak French)
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="if-only">
+        <h2 class="section-title">Cấu trúc If-only chi tiết</h2>
+
+        <div class="card-container">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">If-only ở hiện tại</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                Diễn tả ước muốn mạnh mẽ về một điều không có thật ở hiện tại
+              </p>
+              <p>
+                <strong>Công thức:</strong> If only + S + V-ed (past simple)
+              </p>
+              <p class="example">
+                - If only I <span class="highlight">had</span> more time!<br />-
+                If only she <span class="highlight">knew</span> the truth!
+              </p>
+              <p>
+                Động từ "to be" thường được chia là "were" cho tất cả các ngôi
+              </p>
+              <p class="example">
+                If only he <span class="highlight">were</span> here now!
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">If-only ở quá khứ</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                Diễn tả sự hối tiếc mạnh mẽ về một điều đã xảy ra trong quá khứ
+              </p>
+              <p>
+                <strong>Công thức:</strong> If only + S + had + V3 (past
+                perfect)
+              </p>
+              <p class="example">
+                - If only I <span class="highlight">had listened</span> to your
+                advice!<br />- If only we
+                <span class="highlight">had taken</span> the other road!
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">If-only ở tương lai</h3>
+            </div>
+            <div class="card-body">
+              <p>Diễn tả ước muốn mạnh mẽ về một điều trong tương lai</p>
+              <p><strong>Công thức:</strong> If only + S + would/could + V</p>
+              <p class="example">
+                - If only you <span class="highlight">would change</span> your
+                mind!<br />- If only I
+                <span class="highlight">could</span> travel around the world!
+              </p>
+              <p>
+                If-only thường mang sắc thái mạnh hơn, thể hiện sự khao khát
+                hoặc tiếc nuối mãnh liệt
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="compare">
+        <h2 class="section-title">So sánh Wish và If-only</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Tiêu chí</th>
+              <th>Wish</th>
+              <th>If-only</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Mức độ cảm xúc</strong></td>
+              <td>Thể hiện ước muốn thông thường</td>
+              <td>Thể hiện ước muốn mạnh mẽ, sự tiếc nuối sâu sắc</td>
+            </tr>
+            <tr>
+              <td><strong>Ngữ cảnh sử dụng</strong></td>
+              <td>Phổ biến trong cả văn nói và văn viết</td>
+              <td>
+                Thường dùng trong văn viết hoặc những tình huống cảm xúc mạnh
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Cấu trúc</strong></td>
+              <td>S + wish + (that) + mệnh đề</td>
+              <td>If only + mệnh đề (không có chủ ngữ phía trước)</td>
+            </tr>
+            <tr>
+              <td><strong>Sắc thái</strong></td>
+              <td>Mang tính khách quan hơn</td>
+              <td>Mang tính chủ quan, cảm tính hơn</td>
+            </tr>
+            <tr>
+              <td><strong>Ví dụ</strong></td>
+              <td>I wish I had a million dollars.</td>
+              <td>If only I had a million dollars!</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="examples">
+        <h2 class="section-title">Ví dụ minh họa</h2>
+
+        <div class="card-container">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Wish - Hiện tại</h3>
+              <p class="example">
+                - I wish I <span class="highlight">spoke</span> Italian. (But I
+                don't speak Italian)<br />- They wish they
+                <span class="highlight">had</span> a bigger house. (But they
+                don't have a bigger house)<br />- She wishes she
+                <span class="highlight">were</span> more confident. (But she
+                isn't)
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Wish - Quá khứ</h3>
+              <p class="example">
+                - I wish I <span class="highlight">had gone</span> to bed
+                earlier last night. (But I didn't)<br />- He wishes he
+                <span class="highlight">hadn't eaten</span> so much. (But he
+                did)<br />- We wish we
+                <span class="highlight">had visited</span> Paris when we were in
+                Europe. (But we didn't)
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">If-only - Hiện tại</h3>
+              <p class="example">
+                - If only I <span class="highlight">knew</span> how to solve
+                this problem!<br />- If only she
+                <span class="highlight">were</span> here with us!<br />- If only
+                we <span class="highlight">had</span> more time!
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">If-only - Quá khứ</h3>
+              <p class="example">
+                - If only I <span class="highlight">had known</span> the
+                truth!<br />- If only you
+                <span class="highlight">had told</span> me earlier!<br />- If
+                only they <span class="highlight">hadn't missed</span> the
+                flight!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz">
+        <h2 class="section-title">Bài tập thực hành</h2>
+
+        <div class="quiz-container">
+          <div class="question">
+            <p>
+              <strong>Câu 1:</strong> Chọn đáp án đúng: "I wish I ______ better
+              today, but I have a cold."
+            </p>
+            <div class="options">
+              <label><input type="radio" name="q1" value="a" /> a) feel</label>
+              <label><input type="radio" name="q1" value="b" /> b) felt</label>
+              <label
+                ><input type="radio" name="q1" value="c" /> c) had felt</label
+              >
+              <label
+                ><input type="radio" name="q1" value="d" /> d) would feel</label
+              >
+            </div>
+          </div>
+
+          <div class="question">
+            <p>
+              <strong>Câu 2:</strong> Chọn đáp án đúng: "If only she ______ to
+              me before making that decision."
+            </p>
+            <div class="options">
+              <label
+                ><input type="radio" name="q2" value="a" /> a) listens</label
+              >
+              <label
+                ><input type="radio" name="q2" value="b" /> b) had
+                listened</label
+              >
+              <label
+                ><input type="radio" name="q2" value="c" /> c) would
+                listen</label
+              >
+              <label
+                ><input type="radio" name="q2" value="d" /> d) listen</label
+              >
+            </div>
+          </div>
+
+          <div class="question">
+            <p>
+              <strong>Câu 3:</strong> Chọn đáp án đúng: "He wishes he ______ a
+              car, so he could drive to work."
+            </p>
+            <div class="options">
+              <label><input type="radio" name="q3" value="a" /> a) has</label>
+              <label><input type="radio" name="q3" value="b" /> b) had</label>
+              <label
+                ><input type="radio" name="q3" value="c" /> c) had had</label
+              >
+              <label
+                ><input type="radio" name="q3" value="d" /> d) would have</label
+              >
+            </div>
+          </div>
+
+          <div class="question">
+            <p>
+              <strong>Câu 4:</strong> Chọn đáp án đúng: "If only I ______ how to
+              play the guitar!"
+            </p>
+            <div class="options">
+              <label><input type="radio" name="q4" value="a" /> a) know</label>
+              <label><input type="radio" name="q4" value="b" /> b) knew</label>
+              <label
+                ><input type="radio" name="q4" value="c" /> c) had known</label
+              >
+              <label
+                ><input type="radio" name="q4" value="d" /> d) would know</label
+              >
+            </div>
+          </div>
+
+          <button onclick="checkAnswers()">Kiểm tra kết quả</button>
+          <p
+            id="result"
+            style="margin-top: 1.5rem; font-weight: bold; text-align: center"
+          ></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-content">
+        <p>© 2023 Trang web học tiếng Anh | Wish và If-only</p>
+        <p>Hiểu và sử dụng thành thạo cấu trúc wish và if-only</p>
+      </div>
+    </footer>
+
+    <script>
+      function checkAnswers() {
+        const answers = {
+          q1: "b",
+          q2: "b",
+          q3: "b",
+          q4: "b",
+        };
+
+        let score = 0;
+        let total = Object.keys(answers).length;
+
+        for (let question in answers) {
+          const selected = document.querySelector(
+            `input[name="${question}"]:checked`
+          );
+          if (selected && selected.value === answers[question]) {
+            score++;
+          }
+        }
+
+        const resultElement = document.getElementById("result");
+        resultElement.textContent = `Em đã đúng ${score} trên ${total} câu!`;
+
+        if (score === total) {
+          resultElement.style.color = "#4CAF50";
+          resultElement.innerHTML +=
+            "<br>Xuất sắc! Em đã nắm vững cách sử dụng wish và if-only!";
+        } else if (score >= total / 2) {
+          resultElement.style.color = "#FF9800";
+          resultElement.innerHTML +=
+            "<br>Khá tốt! Hãy ôn tập lại một chút nữa nhé!";
+        } else {
+          resultElement.style.color = "#F44336";
+          resultElement.innerHTML +=
+            "<br>Cần cố gắng thêm! Hãy xem lại các cấu trúc và thử lại!";
+        }
+      }
+    </script>
+  </body>
+</html>

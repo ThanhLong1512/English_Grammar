@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đảo Ngữ - Inversion</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.98);
+        min-height: 100vh;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 8s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(180deg);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-subtitle {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .nav-section {
+        background: white;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .nav-btn {
+        padding: 15px 20px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .nav-btn:hover::before {
+        left: 100%;
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        background: linear-gradient(135deg, #764ba2, #667eea);
+      }
+
+      .content-section {
+        padding: 50px;
+      }
+
+      .section {
+        display: none;
+        animation: slideIn 0.6s ease;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        font-size: 2.8rem;
+        color: #333;
+        margin-bottom: 40px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 20px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 2px;
+      }
+
+      .category-header {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 25px;
+        border-radius: 20px;
+        margin: 50px 0 30px 0;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .category-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.05) 10px,
+          rgba(255, 255, 255, 0.05) 20px
+        );
+        animation: shimmer 3s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+      }
+
+      .content-card {
+        background: white;
+        border-radius: 25px;
+        padding: 35px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        transition: all 0.4s ease;
+        border-left: 8px solid #667eea;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .content-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        opacity: 0.08;
+        border-radius: 0 25px 0 100px;
+      }
+
+      .content-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+        border-left-color: #764ba2;
+      }
+
+      .card-title {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+
+      .card-content {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 15px;
+        font-family: "Courier New", monospace;
+        font-size: 1.1rem;
+        color: #333;
+        border: 2px solid #e9ecef;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(68, 160, 141, 0.3);
+      }
+
+      .example {
+        background: #e8f5e8;
+        border-left: 5px solid #4caf50;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+        font-style: italic;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .usage-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 25px 0;
+        border-left: 6px solid #e17055;
+        box-shadow: 0 8px 25px rgba(253, 203, 110, 0.3);
+      }
+
+      .usage-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .important-note {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border: 2px solid #28a745;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        color: #155724;
+      }
+
+      .warning-note {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        border: 2px solid #dc3545;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        color: #721c24;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .comparison-table th {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px 15px;
+        text-align: left;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .comparison-table td {
+        padding: 18px 15px;
+        border-bottom: 1px solid #e9ecef;
+        vertical-align: top;
+      }
+
+      .comparison-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .quick-reference {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 40px 0;
+        border-left: 8px solid #2196f3;
+      }
+
+      .quick-reference h3 {
+        color: #1976d2;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+      }
+
+      .practice-container {
+        background: white;
+        border-radius: 25px;
+        padding: 40px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        margin-bottom: 50px;
+      }
+
+      .practice-question {
+        margin-bottom: 35px;
+        padding-bottom: 30px;
+        border-bottom: 2px solid #eee;
+      }
+
+      .practice-question:last-child {
+        border-bottom: none;
+      }
+
+      .practice-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        margin-top: 15px;
+        font-size: 1.1rem;
+        transition: border-color 0.3s;
+      }
+
+      .practice-input:focus {
+        border-color: #667eea;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-top: 20px;
+        transition: all 0.3s;
+        box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
+      }
+
+      .check-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+      }
+
+      .result-feedback {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 12px;
+        display: none;
+        font-size: 1.1rem;
+      }
+
+      .correct {
+        background: #d4edda;
+        color: #155724;
+        border: 2px solid #c3e6cb;
+      }
+
+      .incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 2px solid #f5c6cb;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-section {
+          padding: 30px 20px;
+        }
+        .section-title {
+          font-size: 2.2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-title {
+          font-size: 2rem;
+        }
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-section">
+        <h1 class="hero-title">🔄 ĐẢO NGỮ</h1>
+        <p class="hero-subtitle">
+          Inversion - Cấu trúc ngữ pháp nâng cao trong tiếng Anh
+        </p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-grid">
+          <button class="nav-btn active" onclick="showSection('overview')">
+            📋 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('negative')">
+            🔴 Phủ định
+          </button>
+          <button class="nav-btn" onclick="showSection('conditional')">
+            🌀 Điều kiện
+          </button>
+          <button class="nav-btn" onclick="showSection('so-such')">
+            🌟 So/Such
+          </button>
+          <button class="nav-btn" onclick="showSection('adverbial')">
+            📍 Trạng từ
+          </button>
+          <button class="nav-btn" onclick="showSection('special')">
+            ⭐ Đặc biệt
+          </button>
+          <button class="nav-btn" onclick="showSection('practice')">
+            ✍️ Luyện tập
+          </button>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <!-- TỔNG QUAN -->
+        <div class="section active" id="overview">
+          <h2 class="section-title">📋 TỔNG QUAN VỀ ĐẢO NGỮ</h2>
+
+          <div class="quick-reference">
+            <h3>🎯 Định nghĩa</h3>
+            <p>
+              <strong>Đảo ngữ</strong> là hiện tượng đảo trật tự thông thường
+              của câu (Chủ ngữ - Động từ) thành (Động từ/Trợ động từ - Chủ ngữ)
+              để nhấn mạnh hoặc tạo nên cấu trúc đặc biệt.
+            </p>
+          </div>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Loại đảo ngữ</th>
+                <th>Cấu trúc</th>
+                <th>Ví dụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Với trạng từ phủ định</strong></td>
+                <td>Trạng từ phủ định + trợ động từ + S + V</td>
+                <td>Never have I seen such beauty.</td>
+              </tr>
+              <tr>
+                <td><strong>Trong câu điều kiện</strong></td>
+                <td>Were/Had/Should + S + (not) + ...</td>
+                <td>Were I rich, I would travel.</td>
+              </tr>
+              <tr>
+                <td><strong>Với "only"</strong></td>
+                <td>Only + trạng từ/cụm trạng từ + trợ động từ + S + V</td>
+                <td>Only then did I understand.</td>
+              </tr>
+              <tr>
+                <td><strong>Với "so", "such"</strong></td>
+                <td>So/Such + tính từ + trợ động từ + S + V + that...</td>
+                <td>So beautiful was she that everyone stared.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="important-note">
+            <strong>📝 Lưu ý quan trọng:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>
+                Đảo ngữ thường được sử dụng trong văn viết trang trọng hoặc văn
+                học
+              </li>
+              <li>
+                Không sử dụng đảo ngữ khi chủ ngữ là đại từ trong các trường hợp
+                thông thường
+              </li>
+              <li>
+                Đảo ngữ giúp nhấn mạnh thông tin và làm câu văn sinh động hơn
+              </li>
+              <li>
+                Cần nắm vững cấu trúc để tránh nhầm lẫn khi sử dụng đảo ngữ
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ĐẢO NGỮ VỚI TRẠNG TỪ PHỦ ĐỊNH -->
+        <div class="section" id="negative">
+          <h2 class="section-title">🔴 ĐẢO NGỮ VỚI TRẠNG TỪ PHỦ ĐỊNH</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔴</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="card-content">
+                <strong>Công thức:</strong>
+                <span class="highlight"
+                  >Trạng từ phủ định + trợ động từ + S + V</span
+                ><br /><br />
+                <strong>Các trạng từ phủ định thường gặp:</strong><br />
+                • Never (không bao giờ)<br />
+                • Rarely (hiếm khi)<br />
+                • Seldom (ít khi)<br />
+                • Hardly (hầu như không)<br />
+                • Scarcely (hầu như không)<br />
+                • Barely (chỉ vừa đủ, hầu như không)<br />
+                • Little (ít khi)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Never have I seen such a beautiful sunset.<br />
+                • Rarely does she go to the cinema.<br />
+                • Seldom have we encountered such difficult problems.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">💡 Sử dụng khi:</div>
+                • Nhấn mạnh tính phủ định của hành động<br />
+                • Diễn tả sự hiếm khi xảy ra của sự việc<br />
+                • Trong văn viết trang trọng, văn học<br />
+                • Khi muốn tạo ấn tượng mạnh với người đọc/nghe
+              </div>
+              <div class="example">
+                <strong>Ví dụ thực tế:</strong><br />
+                • Never in my life have I been so embarrassed.<br />
+                • Rarely do we see such dedication these days.<br />
+                • Seldom has the company faced such a crisis.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⏰</div>
+                Với "No sooner", "Hardly/Scarcely"
+              </div>
+              <div class="card-content">
+                <strong>No sooner... than:</strong>
+                <span class="highlight"
+                  >No sooner + had + S + V3 + than + S + V</span
+                ><br /><br />
+                <strong>Hardly/Scarcely... when:</strong>
+                <span class="highlight"
+                  >Hardly/Scarcely + had + S + V3 + when + S + V</span
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • No sooner had I left than it started raining.<br />
+                • Hardly had she finished her speech when the audience
+                applauded.<br />
+                • Scarcely had I stepped out when the phone rang.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Lưu ý quan trọng
+              </div>
+              <div class="warning-note">
+                <strong>Chú ý khi sử dụng:</strong><br /><br />
+                • Không sử dụng đảo ngữ với các trạng từ phủ định trong văn nói
+                thông thường<br />
+                • Đảm bảo sử dụng đúng trợ động từ theo thì của câu<br />
+                • "No sooner" đi với "than", không đi với "when"<br />
+                • "Hardly/Scarcely" đi với "when", không đi với "than"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ĐẢO NGỮ TRONG CÂU ĐIỀU KIỆN -->
+        <div class="section" id="conditional">
+          <h2 class="section-title">🌀 ĐẢO NGỮ TRONG CÂU ĐIỀU KIỆN</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🌀</div>
+                Câu điều kiện loại 2
+              </div>
+              <div class="card-content">
+                <strong>Công thức:</strong>
+                <span class="highlight">Were + S + to V/O, S + would + V</span
+                ><br /><br />
+                <strong>Hoặc:</strong>
+                <span class="highlight">Were + S + ..., S + would + V</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Were I you, I would accept that offer. (If I were you...)<br />
+                • Were he to try harder, he would succeed. (If he tried
+                harder...)<br />
+                • Were she here, she would know what to do. (If she were
+                here...)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🌀</div>
+                Câu điều kiện loại 3
+              </div>
+              <div class="card-content">
+                <strong>Công thức:</strong>
+                <span class="highlight"
+                  >Had + S + V3/ed, S + would have + V3/ed</span
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Had I known, I would have helped. (If I had known...)<br />
+                • Had she studied harder, she would have passed. (If she had
+                studied harder...)<br />
+                • Had they arrived earlier, they would have seen the show. (If
+                they had arrived earlier...)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🌀</div>
+                Câu điều kiện loại 1
+              </div>
+              <div class="card-content">
+                <strong>Công thức:</strong>
+                <span class="highlight">Should + S + V, S + will + V</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Should you see Tom, tell him to call me. (If you see
+                Tom...)<br />
+                • Should it rain, we will cancel the picnic. (If it rains...)<br />
+                • Should he arrive late, we will start without him. (If he
+                arrives late...)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">💡</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">🎯 Sử dụng khi:</div>
+                • Muốn câu điều kiện trang trọng hơn<br />
+                • Nhấn mạnh tính giả định của điều kiện<br />
+                • Trong văn viết học thuật, trang trọng<br />
+                • Khi muốn diễn đạt ngắn gọn hơn
+              </div>
+              <div class="example">
+                <strong>So sánh:</strong><br />
+                • Thông thường: If I were in your position, I would agree.<br />
+                • Đảo ngữ: Were I in your position, I would agree.<br /><br />
+                • Thông thường: If I had known the truth, I would have told
+                you.<br />
+                • Đảo ngữ: Had I known the truth, I would have told you.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ĐẢO NGỮ VỚI "SO" VÀ "SUCH" -->
+        <div class="section" id="so-such">
+          <h2 class="section-title">🌟 ĐẢO NGỮ VỚI "SO" VÀ "SUCH"</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🌟</div>
+                Với "So"
+              </div>
+              <div class="card-content">
+                <strong>Công thức 1:</strong>
+                <span class="highlight"
+                  >So + adjective + be + S + that + clause</span
+                ><br /><br />
+                <strong>Công thức 2:</strong>
+                <span class="highlight"
+                  >So + adverb + trợ động từ + S + V + that + clause</span
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • So beautiful is the scenery that I can't stop looking.<br />
+                • So quickly did he run that no one could catch him.<br />
+                • So difficult was the exam that many students failed.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🌟</div>
+                Với "Such"
+              </div>
+              <div class="card-content">
+                <strong>Công thức 1:</strong>
+                <span class="highlight">Such + be + N + that + clause</span
+                ><br /><br />
+                <strong>Công thức 2:</strong>
+                <span class="highlight"
+                  >Such + N + trợ động từ + S + V + that + clause</span
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Such was the noise that I couldn't concentrate.<br />
+                • Such a beautiful sunset have I never seen before.<br />
+                • Such interesting books does she own that I often borrow them.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">💡 Sử dụng khi:</div>
+                • Nhấn mạnh mức độ của tính từ/trạng từ<br />
+                • Diễn tả kết quả đặc biệt của một tình huống<br />
+                • Trong văn miêu tả, văn học<br />
+                • Khi muốn tạo ấn tượng về mức độ đặc biệt
+              </div>
+              <div class="example">
+                <strong>Ví dụ thực tế:</strong><br />
+                • So exhausted was she that she fell asleep immediately.<br />
+                • Such was his anger that he couldn't speak.<br />
+                • So loudly did they argue that the neighbors complained.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Phân biệt "So" và "Such"
+              </div>
+              <div class="warning-note">
+                <strong>Chú ý phân biệt:</strong><br /><br />
+                • <strong>So</strong> + tính từ/trạng từ<br />
+                • <strong>Such</strong> + (a/an) + tính từ + danh từ<br /><br />
+                • So beautiful → Such a beautiful girl<br />
+                • So difficult → Such a difficult problem<br />
+                • So interesting → Such an interesting story
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ĐẢO NGỮ VỚI TRẠNG TỪ CHỈ NƠI CHỐN -->
+        <div class="section" id="adverbial">
+          <h2 class="section-title">📍 ĐẢO NGỮ VỚI TRẠNG TỪ CHỈ NƠI CHỐN</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📍</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="card-content">
+                <strong>Công thức:</strong>
+                <span class="highlight">Trạng từ chỉ nơi chốn + V + S</span
+                ><br /><br />
+                <strong>Các trạng từ thường gặp:</strong><br />
+                • Here (ở đây)<br />
+                • There (ở đó)<br />
+                • In, On, Out, Up, Down, Away<br />
+                • Các cụm giới từ chỉ nơi chốn
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Here comes the bus.<br />
+                • There goes my chance of winning.<br />
+                • On the hill stood an ancient castle.<br />
+                • In the corner sat an old man.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">💡 Sử dụng khi:</div>
+                • Miêu tả cảnh vật, địa điểm<br />
+                • Trong văn miêu tả, tự sự<br />
+                • Khi muốn nhấn mạnh vị trí<br />
+                • Để tạo sự sinh động cho câu văn
+              </div>
+              <div class="example">
+                <strong>Ví dụ thực tế:</strong><br />
+                • At the top of the mountain lies a small temple.<br />
+                • Through the forest runs a clear stream.<br />
+                • In front of the house grew a beautiful oak tree.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Lưu ý quan trọng
+              </div>
+              <div class="warning-note">
+                <strong>Chú ý khi sử dụng:</strong><br /><br />
+                • Không dùng đảo ngữ khi chủ ngữ là đại từ<br />
+                • Chỉ sử dụng với động từ "be" hoặc nội động từ (không cần tân
+                ngữ)<br />
+                • Thường dùng trong văn miêu tả, ít dùng trong văn nói thông
+                thường<br />
+                • Đảm bảo tính tự nhiên và phù hợp với ngữ cảnh
+              </div>
+              <div class="example">
+                <strong>So sánh:</strong><br />
+                • Đúng: Here comes the teacher.<br />
+                • Sai: Here comes he.<br />
+                • Đúng: Here he comes.<br />
+                • Đúng: There goes the bus.<br />
+                • Sai: There goes it.<br />
+                • Đúng: There it goes.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CẤU TRÚC ĐẢO NGỮ ĐẶC BIỆT -->
+        <div class="section" id="special">
+          <h2 class="section-title">⭐ CẤU TRÚC ĐẢO NGỮ ĐẶC BIỆT</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⭐</div>
+                Với "Only"
+              </div>
+              <div class="card-content">
+                <strong>Công thức:</strong>
+                <span class="highlight"
+                  >Only + trạng từ/trạng ngữ + trợ động từ + S + V</span
+                ><br /><br />
+                <strong>Các từ thường đi với "Only":</strong><br />
+                • Only after (chỉ sau khi)<br />
+                • Only when (chỉ khi)<br />
+                • Only if (chỉ nếu)<br />
+                • Only by (chỉ bằng cách)<br />
+                • Only then (chỉ đến lúc đó)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Only after finishing his homework did he go out.<br />
+                • Only when she left did I realize how much I loved her.<br />
+                • Only by practicing regularly can you improve your English.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⭐</div>
+                Với "Not only"
+              </div>
+              <div class="card-content">
+                <strong>Công thức:</strong>
+                <span class="highlight"
+                  >Not only + trợ động từ + S + V + but also...</span
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Not only does he speak French, but he also speaks Japanese.<br />
+                • Not only did she finish the project, but she also helped
+                others.<br />
+                • Not only is he talented, but he is also very hard-working.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⭐</div>
+                Với "Not until"
+              </div>
+              <div class="card-content">
+                <strong>Công thức:</strong>
+                <span class="highlight"
+                  >Not until + time/clause + trợ động từ + S + V</span
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Not until yesterday did I understand the problem.<br />
+                • Not until she explained it to me did I realize my mistake.<br />
+                • Not until midnight did they finish the work.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⭐</div>
+                Với các thành ngữ phủ định
+              </div>
+              <div class="card-content">
+                <strong>Các thành ngữ thường gặp:</strong><br />
+                • Under no circumstances (dưới không hoàn cảnh nào)<br />
+                • On no account (không vì bất cứ lý do gì)<br />
+                • In no way (không cách nào)<br />
+                • At no time (không lúc nào)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Under no circumstances should you touch this switch.<br />
+                • On no account are visitors allowed to feed the animals.<br />
+                • In no way does this affect our decision.<br />
+                • At no time did the president agree to the proposal.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUYỆN TẬP -->
+        <div class="section" id="practice">
+          <h2 class="section-title">✍️ LUYỆN TẬP ĐẢO NGỮ</h2>
+
+          <div class="practice-container">
+            <div class="practice-question">
+              <p>
+                <strong>Câu 1:</strong> Viết lại câu sử dụng đảo ngữ: I have
+                never seen such a beautiful sunset.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer1"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(1, 'Never have I seen such a beautiful sunset.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result1"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 2:</strong> Viết lại câu sử dụng đảo ngữ: If I had
+                known the truth, I would have told you.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer2"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(2, 'Had I known the truth, I would have told you.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result2"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 3:</strong> Viết lại câu sử dụng đảo ngữ: The
+                scenery is so beautiful that I can't stop looking at it.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer3"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(3, 'So beautiful is the scenery that I can\'t stop looking at it.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result3"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 4:</strong> Viết lại câu sử dụng đảo ngữ: She not
+                only sings well but also dances beautifully.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer4"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(4, 'Not only does she sing well, but she also dances beautifully.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result4"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 5:</strong> Viết lại câu sử dụng đảo ngữ: You
+                shouldn't touch this switch under any circumstances.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer5"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(5, 'Under no circumstances should you touch this switch.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result5"></div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📝 Mẹo làm bài:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>Xác định đúng loại đảo ngữ cần sử dụng</li>
+              <li>Nhớ công thức của từng loại đảo ngữ</li>
+              <li>Chú ý sử dụng đúng trợ động từ theo thì của câu</li>
+              <li>Kiểm tra lại trật tự từ trước khi kết luận</li>
+              <li>Đảm bảo câu đảo ngữ vẫn giữ nguyên nghĩa với câu gốc</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+      function showSection(sectionId) {
+        // Ẩn tất cả các section
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Hiển thị section được chọn
+        document.getElementById(sectionId).classList.add("active");
+
+        // Cập nhật trạng thái active cho nút
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Tìm nút tương ứng với section được chọn và thêm class active
+        document
+          .querySelector(`.nav-btn[onclick="showSection('${sectionId}')"]`)
+          .classList.add("active");
+
+        // Cuộn lên đầu trang
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function checkAnswer(questionNum, correctAnswer) {
+        const userAnswer = document
+          .getElementById(`answer${questionNum}`)
+          .value.trim();
+        const resultElement = document.getElementById(`result${questionNum}`);
+
+        // Chuẩn hóa câu trả lời: bỏ khoảng trắng thừa, chuyển về chữ thường
+        const normalizedUserAnswer = userAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .replace(/[.,]/g, "");
+        const normalizedCorrectAnswer = correctAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .replace(/[.,]/g, "");
+
+        if (normalizedUserAnswer === normalizedCorrectAnswer) {
+          resultElement.textContent = "✓ Chính xác! Câu trả lời của Em đúng.";
+          resultElement.className = "result-feedback correct";
+        } else {
+          resultElement.textContent = `✗ Chưa chính xác. Đáp án đúng là: "${correctAnswer}"`;
+          resultElement.className = "result-feedback incorrect";
+        }
+
+        resultElement.style.display = "block";
+      }
+
+      // Hiển thị nút back to top khi cuộn
+      window.onscroll = function () {
+        const backToTopButton = document.querySelector(".back-to-top");
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      };
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

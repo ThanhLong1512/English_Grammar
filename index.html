@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ngữ pháp Tiếng Anh THPT Quốc gia 2024</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 8s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(180deg);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+        opacity: 0.9;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.98);
+        min-height: 100vh;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-section {
+        background: white;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .nav-btn {
+        padding: 12px 18px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .nav-btn:hover::before {
+        left: 100%;
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        background: linear-gradient(135deg, #764ba2, #667eea);
+      }
+
+      .content-section {
+        padding: 40px;
+      }
+
+      .section {
+        display: none;
+        animation: slideIn 0.6s ease;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 20px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 2px;
+      }
+
+      .category-header {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 40px 0 25px 0;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .category-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.05) 10px,
+          rgba(255, 255, 255, 0.05) 20px
+        );
+        animation: shimmer 3s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+      }
+
+      .content-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
+        border-left: 6px solid #667eea;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .content-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        opacity: 0.1;
+        border-radius: 0 20px 0 80px;
+      }
+
+      .content-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        border-left-color: #764ba2;
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .card-icon {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+
+      .card-content {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        font-family: "Courier New", monospace;
+        font-size: 1rem;
+        color: #333;
+        border: 2px solid #e9ecef;
+        margin-bottom: 15px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(68, 160, 141, 0.3);
+      }
+
+      .example {
+        background: #e8f5e8;
+        border-left: 4px solid #4caf50;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+        font-style: italic;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .tip-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 5px solid #e17055;
+        box-shadow: 0 8px 25px rgba(253, 203, 110, 0.3);
+      }
+
+      .tip-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+
+      .search-section {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .search-box {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 18px 25px;
+        border: 3px solid #e9ecef;
+        border-radius: 30px;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-input:focus {
+        border-color: #667eea;
+        box-shadow: 0 8px 35px rgba(102, 126, 234, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .formula-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .formula-table th {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .formula-table td {
+        padding: 15px;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .formula-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .important-note {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border: 2px solid #28a745;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #155724;
+      }
+
+      .warning-note {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        border: 2px solid #dc3545;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #721c24;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-section {
+          padding: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-section">
+        <h1 class="hero-title">📖 NGỮ PHÁP TIẾNG ANH</h1>
+        <p class="hero-subtitle">
+          Tổng hợp đầy đủ ngữ pháp cho THPT Quốc gia 2024
+        </p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-grid">
+          <button class="nav-btn active" onclick="showSection('tenses')">
+            ⏰ Các thì
+          </button>
+          <button
+            class="nav-btn"
+            onclick="window.location.href='condition.html'"
+          >
+            🔄 Câu điều kiện
+          </button>
+          <button
+            class="nav-btn"
+            onclick="window.location.href='tuongthuat.html'"
+          >
+            🗣️ Câu tường thuật
+          </button>
+          <button class="nav-btn" onclick="window.location.href='bidong.html'">
+            🔄 Câu bị động
+          </button>
+          <button class="nav-btn" onclick="window.location.href='quanhe.html'">
+            🔗 Mệnh đề quan hệ
+          </button>
+          <button class="nav-btn" onclick="window.location.href='compare.html'">
+            ⚖️ So sánh
+          </button>
+          <button
+            class="nav-btn"
+            onclick="window.location.href='infinitive.html'"
+          >
+            ⚡ Gerund/Infinitive
+          </button>
+          <button class="nav-btn" onclick="window.location.href='daongu.html'">
+            🔀 Đảo ngữ
+          </button>
+          <button
+            class="nav-btn"
+            onclick="window.location.href='modalVerbs.html'"
+          >
+            💪 Modal verbs
+          </button>
+          <button
+            class="nav-btn"
+            onclick="window.location.href='wishOnly.html'"
+          >
+            🤞 Wish/If only
+          </button>
+
+          <button class="nav-btn" onclick="showSection('subjunctive')">
+            🎭 Thức giả định
+          </button>
+          <button
+            class="nav-btn"
+            onclick="window.location.href='Challenge.html'"
+          >
+            🚀 Vocabulary Challenge
+          </button>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <div class="search-section">
+          <div class="search-box">
+            <input
+              type="text"
+              class="search-input"
+              id="searchInput"
+              placeholder="🔍 Tìm kiếm ngữ pháp..."
+            />
+          </div>
+        </div>
+
+        <!-- CÁC THÌ -->
+        <div class="section active" id="tenses">
+          <h2 class="section-title">⏰ CÁC THÌ TRONG TIẾNG ANH</h2>
+
+          <div class="category-header">📅 HIỆN TẠI (PRESENT)</div>
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📅</div>
+                Present Simple
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + V(s/es)</span><br />
+                (-) <span class="highlight">S + don't/doesn't + V</span><br />
+                (?) <span class="highlight">Do/Does + S + V?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She works in a bank.<br />
+                • He doesn't like coffee.<br />
+                • Do you speak English?
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Thói quen hàng ngày<br />
+                • Sự thật hiển nhiên, chân lý<br />
+                • Lịch trình cố định<br />
+                • Trạng thái tồn tại lâu dài
+              </div>
+              <div class="important-note">
+                <strong>📍 Dấu hiệu nhận biết:</strong> always, usually, often,
+                sometimes, never, every day/week/month
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⏳</div>
+                Present Continuous
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + am/is/are + V-ing</span><br />
+                (-) <span class="highlight">S + am/is/are + not + V-ing</span
+                ><br />
+                (?) <span class="highlight">Am/Is/Are + S + V-ing?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I am studying English now.<br />
+                • They are not watching TV.<br />
+                • Are you listening to music?
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Hành động đang xảy ra tại thời điểm nói<br />
+                • Kế hoạch trong tương lai gần<br />
+                • Thói quen tạm thời<br />
+                • Phàn nàn (với always)
+              </div>
+              <div class="important-note">
+                <strong>📍 Dấu hiệu nhận biết:</strong> now, at the moment,
+                currently, right now, at present
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Present Perfect
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + have/has + V3/ed</span><br />
+                (-) <span class="highlight">S + haven't/hasn't + V3/ed</span
+                ><br />
+                (?) <span class="highlight">Have/Has + S + V3/ed?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I have lived here for 5 years.<br />
+                • She has just finished her homework.<br />
+                • Have you ever been to Japan?
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Hành động xảy ra trong quá khứ, kết quả còn ảnh hưởng hiện
+                tại<br />
+                • Kinh nghiệm sống<br />
+                • Hành động bắt đầu trong quá khứ, tiếp tục đến hiện tại
+              </div>
+              <div class="important-note">
+                <strong>📍 Dấu hiệu nhận biết:</strong> just, already, yet,
+                ever, never, since, for, recently, lately, so far
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📊</div>
+                Present Perfect Continuous
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + have/has + been + V-ing</span
+                ><br />
+                (-)
+                <span class="highlight">S + haven't/hasn't + been + V-ing</span
+                ><br />
+                (?) <span class="highlight">Have/Has + S + been + V-ing?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I have been waiting for you for 2 hours.<br />
+                • She has been working here since 2020.<br />
+                • How long have you been learning English?
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Hành động bắt đầu trong quá khứ, tiếp tục đến hiện tại và có
+                thể tiếp tục<br />
+                • Nhấn mạnh tính liên tục của hành động
+              </div>
+            </div>
+          </div>
+
+          <div class="category-header">🕐 QUÁ KHỨ (PAST)</div>
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🕐</div>
+                Past Simple
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + V2/ed</span><br />
+                (-) <span class="highlight">S + didn't + V</span><br />
+                (?) <span class="highlight">Did + S + V?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I went to school yesterday.<br />
+                • She didn't watch TV last night.<br />
+                • Did you see the movie?
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Hành động đã xảy ra và kết thúc trong quá khứ<br />
+                • Thói quen trong quá khứ<br />
+                • Chuỗi hành động liên tiếp trong quá khứ
+              </div>
+              <div class="important-note">
+                <strong>📍 Dấu hiệu nhận biết:</strong> yesterday, last
+                week/month/year, ago, in 2020, when
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📊</div>
+                Past Continuous
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + was/were + V-ing</span><br />
+                (-) <span class="highlight">S + wasn't/weren't + V-ing</span
+                ><br />
+                (?) <span class="highlight">Was/Were + S + V-ing?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I was watching TV at 8pm yesterday.<br />
+                • They were playing football when it rained.<br />
+                • What were you doing at this time yesterday?
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Hành động đang xảy ra tại một thời điểm xác định trong quá
+                khứ<br />
+                • Hành động đang xảy ra thì có hành động khác xen vào<br />
+                • Hai hành động xảy ra song song trong quá khứ
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Past Perfect
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + had + V3/ed</span><br />
+                (-) <span class="highlight">S + hadn't + V3/ed</span><br />
+                (?) <span class="highlight">Had + S + V3/ed?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • When I arrived, she had already left.<br />
+                • I had finished my work before he came.<br />
+                • Had you ever seen snow before you moved here?
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Hành động xảy ra trước một hành động/thời điểm khác trong quá
+                khứ<br />
+                • Hành động hoàn thành trước một thời điểm trong quá khứ
+              </div>
+              <div class="important-note">
+                <strong>📍 Dấu hiệu nhận biết:</strong> after, before, by the
+                time, when, until, as soon as
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📊</div>
+                Past Perfect Continuous
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + had + been + V-ing</span><br />
+                (-) <span class="highlight">S + hadn't + been + V-ing</span
+                ><br />
+                (?) <span class="highlight">Had + S + been + V-ing?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I had been waiting for 2 hours when she arrived.<br />
+                • They had been living there for 10 years before they moved.
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Hành động diễn ra liên tục trước một hành động/thời điểm khác
+                trong quá khứ
+              </div>
+            </div>
+          </div>
+
+          <div class="category-header">🔮 TƯƠNG LAI (FUTURE)</div>
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔮</div>
+                Future Simple (will)
+              </div>
+              <div class="card-content">
+                <strong>Cấu trúc:</strong><br />
+                (+) <span class="highlight">S + will + V</span><br />
+                (-) <span class="highlight">S + won't + V</span><br />
+                (?) <span class="highlight">Will + S + V?</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I will call you tomorrow.<br />
+                • She won't come to the party.<br />
+                • Will you help me with this?
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">💡 Cách dùng:</div>
+                • Quyết định tức thời<br />
+                • Dự đoán về tương lai<br />
+                • Lời hứa, đề nghị, yêu cầu
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📅</div>
+                Future Simple (be going to)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

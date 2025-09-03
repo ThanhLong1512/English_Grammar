@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Câu điều kiện - Conditional Sentences</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.98);
+        min-height: 100vh;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 8s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(180deg);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-subtitle {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .nav-section {
+        background: white;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .nav-btn {
+        padding: 15px 20px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .nav-btn:hover::before {
+        left: 100%;
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        background: linear-gradient(135deg, #764ba2, #667eea);
+      }
+
+      .content-section {
+        padding: 50px;
+      }
+
+      .section {
+        display: none;
+        animation: slideIn 0.6s ease;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        font-size: 2.8rem;
+        color: #333;
+        margin-bottom: 40px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 20px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 2px;
+      }
+
+      .category-header {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 25px;
+        border-radius: 20px;
+        margin: 50px 0 30px 0;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .category-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.05) 10px,
+          rgba(255, 255, 255, 0.05) 20px
+        );
+        animation: shimmer 3s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+      }
+
+      .content-card {
+        background: white;
+        border-radius: 25px;
+        padding: 35px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        transition: all 0.4s ease;
+        border-left: 8px solid #667eea;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .content-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        opacity: 0.08;
+        border-radius: 0 25px 0 100px;
+      }
+
+      .content-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+        border-left-color: #764ba2;
+      }
+
+      .card-title {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+
+      .card-content {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 15px;
+        font-family: "Courier New", monospace;
+        font-size: 1.1rem;
+        color: #333;
+        border: 2px solid #e9ecef;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(68, 160, 141, 0.3);
+      }
+
+      .example {
+        background: #e8f5e8;
+        border-left: 5px solid #4caf50;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+        font-style: italic;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .usage-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 25px 0;
+        border-left: 6px solid #e17055;
+        box-shadow: 0 8px 25px rgba(253, 203, 110, 0.3);
+      }
+
+      .usage-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .important-note {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border: 2px solid #28a745;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        color: #155724;
+      }
+
+      .warning-note {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        border: 2px solid #dc3545;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        color: #721c24;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .comparison-table th {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px 15px;
+        text-align: left;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .comparison-table td {
+        padding: 18px 15px;
+        border-bottom: 1px solid #e9ecef;
+        vertical-align: top;
+      }
+
+      .comparison-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .quick-reference {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 40px 0;
+        border-left: 8px solid #2196f3;
+      }
+
+      .quick-reference h3 {
+        color: #1976d2;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+      }
+
+      .practice-container {
+        background: white;
+        border-radius: 25px;
+        padding: 40px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        margin-bottom: 50px;
+      }
+
+      .practice-question {
+        margin-bottom: 35px;
+        padding-bottom: 30px;
+        border-bottom: 2px solid #eee;
+      }
+
+      .practice-question:last-child {
+        border-bottom: none;
+      }
+
+      .practice-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        margin-top: 15px;
+        font-size: 1.1rem;
+        transition: border-color 0.3s;
+      }
+
+      .practice-input:focus {
+        border-color: #667eea;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-top: 20px;
+        transition: all 0.3s;
+        box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
+      }
+
+      .check-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+      }
+
+      .result-feedback {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 12px;
+        display: none;
+        font-size: 1.1rem;
+      }
+
+      .correct {
+        background: #d4edda;
+        color: #155724;
+        border: 2px solid #c3e6cb;
+      }
+
+      .incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 2px solid #f5c6cb;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-section {
+          padding: 30px 20px;
+        }
+        .section-title {
+          font-size: 2.2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-title {
+          font-size: 2rem;
+        }
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-section">
+        <h1 class="hero-title">🔄 CÂU ĐIỀU KIỆN</h1>
+        <p class="hero-subtitle">
+          Conditional Sentences - Tổng hợp đầy đủ và chi tiết nhất
+        </p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-grid">
+          <button class="nav-btn active" onclick="showSection('overview')">
+            📋 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('type0')">
+            🔢 Loại 0
+          </button>
+          <button class="nav-btn" onclick="showSection('type1')">
+            1️⃣ Loại 1
+          </button>
+          <button class="nav-btn" onclick="showSection('type2')">
+            2️⃣ Loại 2
+          </button>
+          <button class="nav-btn" onclick="showSection('type3')">
+            3️⃣ Loại 3
+          </button>
+          <button class="nav-btn" onclick="showSection('mixed')">
+            🔀 Hỗn hợp
+          </button>
+          <button class="nav-btn" onclick="showSection('special')">
+            ⭐ Đặc biệt
+          </button>
+          <button class="nav-btn" onclick="showSection('practice')">
+            ✍️ Luyện tập
+          </button>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <!-- TỔNG QUAN -->
+        <div class="section active" id="overview">
+          <h2 class="section-title">📋 TỔNG QUAN VỀ CÂU ĐIỀU KIỆN</h2>
+
+          <div class="quick-reference">
+            <h3>🎯 Định nghĩa</h3>
+            <p>
+              <strong>Câu điều kiện</strong> là câu diễn tả một hành động có thể
+              xảy ra khi có điều kiện nào đó. Câu điều kiện gồm 2 mệnh đề:
+            </p>
+            <ul style="margin-top: 15px; padding-left: 25px">
+              <li>
+                <strong>Mệnh đề điều kiện (If clause):</strong> Bắt đầu bằng
+                "If"
+              </li>
+              <li>
+                <strong>Mệnh đề chính (Main clause):</strong> Diễn tả kết quả
+              </li>
+            </ul>
+          </div>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Loại</th>
+                <th>Điều kiện</th>
+                <th>Cấu trúc If clause</th>
+                <th>Cấu trúc Main clause</th>
+                <th>Ví dụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Loại 0</strong></td>
+                <td>Chân lý, sự thật hiển nhiên</td>
+                <td>If + S + V(s/es)</td>
+                <td>S + V(s/es)</td>
+                <td>If you heat water, it boils.</td>
+              </tr>
+              <tr>
+                <td><strong>Loại 1</strong></td>
+                <td>Có thể xảy ra ở hiện tại/tương lai</td>
+                <td>If + S + V(s/es)</td>
+                <td>S + will + V</td>
+                <td>If it rains, I will stay home.</td>
+              </tr>
+              <tr>
+                <td><strong>Loại 2</strong></td>
+                <td>Không có thật ở hiện tại</td>
+                <td>If + S + V2/ed</td>
+                <td>S + would + V</td>
+                <td>If I were rich, I would travel.</td>
+              </tr>
+              <tr>
+                <td><strong>Loại 3</strong></td>
+                <td>Không có thật trong quá khứ</td>
+                <td>If + S + had + V3/ed</td>
+                <td>S + would have + V3/ed</td>
+                <td>If I had studied, I would have passed.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="important-note">
+            <strong>📝 Lưu ý quan trọng:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>Có thể đảo vị trí 2 mệnh đề: Main clause + if clause</li>
+              <li>Khi mệnh đề if đứng trước, cần có dấu phẩy ngăn cách</li>
+              <li>Unless = If not (trừ khi)</li>
+              <li>
+                Có thể dùng were cho tất cả ngôi trong câu điều kiện loại 2
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LOẠI 0 -->
+        <div class="section" id="type0">
+          <h2 class="section-title">🔢 CÂU ĐIỀU KIỆN LOẠI 0</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔢</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="card-content">
+                <strong>If clause:</strong>
+                <span class="highlight">If + S + V(s/es)</span><br />
+                <strong>Main clause:</strong>
+                <span class="highlight">S + V(s/es)</span><br /><br />
+                <strong>Có thể thay If bằng:</strong> When, Whenever
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • If you heat ice, it melts.<br />
+                • When you mix red and blue, you get purple.<br />
+                • If you don't water plants, they die.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">💡</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">🎯 Sử dụng khi:</div>
+                • Diễn tả chân lý, sự thật hiển nhiên<br />
+                • Quy luật tự nhiên, khoa học<br />
+                • Thói quen, hành động lặp đi lặp lại<br />
+                • Hướng dẫn, chỉ dẫn
+              </div>
+              <div class="example">
+                <strong>Ví dụ thực tế:</strong><br />
+                • If you press this button, the machine starts.<br />
+                • If it's sunny, we usually go to the beach.<br />
+                • If you study hard, you get good grades.
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-note">
+            <strong>⚠️ Chú ý:</strong> Câu điều kiện loại 0 không dùng "will"
+            trong cả hai mệnh đề vì diễn tả sự thật chắc chắn, không phải dự
+            đoán.
+          </div>
+        </div>
+
+        <!-- LOẠI 1 -->
+        <div class="section" id="type1">
+          <h2 class="section-title">1️⃣ CÂU ĐIỀU KIỆN LOẠI 1</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">1️⃣</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="card-content">
+                <strong>If clause:</strong>
+                <span class="highlight">If + S + V(s/es)</span><br />
+                <strong>Main clause:</strong>
+                <span class="highlight">S + will + V</span><br /><br />
+                <strong>Biến thể:</strong><br />
+                • can/may/must/should + V<br />
+                • Câu mệnh lệnh
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • If it rains tomorrow, I will stay home.<br />
+                • If you finish your homework, you can watch TV.<br />
+                • If you see John, tell him to call me.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">💡 Sử dụng khi:</div>
+                • Điều kiện có thể xảy ra ở hiện tại/tương lai<br />
+                • Dự đoán có căn cứ<br />
+                • Lời đe dọa, cảnh báo<br />
+                • Lời hứa, đề nghị
+              </div>
+              <div class="example">
+                <strong>Các tình huống thực tế:</strong><br />
+                • If you don't hurry, you will miss the bus.<br />
+                • If you help me, I will help you too.<br />
+                • If she studies hard, she will pass the exam.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚡</div>
+                Các biến thể đặc biệt
+              </div>
+              <div class="card-content">
+                <strong>1. Unless (trừ khi):</strong><br />
+                <span class="highlight"
+                  >Unless + S + V = If + S + don't/doesn't + V</span
+                ><br /><br />
+                <strong>2. Provided that/Providing that:</strong><br />
+                <span class="highlight">Provided that + S + V</span><br /><br />
+                <strong>3. As long as/So long as:</strong><br />
+                <span class="highlight">As long as + S + V</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Unless you study, you will fail.<br />
+                • Provided that you pay on time, there's no problem.<br />
+                • As long as you're happy, I'm happy.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Các thì khác trong If clause
+              </div>
+              <div class="card-content">
+                <strong>Present Continuous:</strong><br />
+                <span class="highlight">If + S + am/is/are + V-ing</span
+                ><br /><br />
+                <strong>Present Perfect:</strong><br />
+                <span class="highlight">If + S + have/has + V3/ed</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • If you are coming, please let me know.<br />
+                • If you have finished your work, you can go home.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOẠI 2 -->
+        <div class="section" id="type2">
+          <h2 class="section-title">2️⃣ CÂU ĐIỀU KIỆN LOẠI 2</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">2️⃣</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="card-content">
+                <strong>If clause:</strong>
+                <span class="highlight">If + S + V2/ed</span><br />
+                <strong>Main clause:</strong>
+                <span class="highlight">S + would + V</span><br /><br />
+                <strong>Đặc biệt với "be":</strong><br />
+                <span class="highlight">If + S + were</span> (tất cả ngôi)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • If I were rich, I would buy a big house.<br />
+                • If she studied harder, she would pass the exam.<br />
+                • If I had time, I would learn guitar.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎭</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">🎯 Sử dụng khi:</div>
+                • Điều kiện không có thật ở hiện tại<br />
+                • Tình huống tưởng tượng<br />
+                • Lời khuyên một cách lịch sự<br />
+                • Điều ước không thể thực hiện
+              </div>
+              <div class="example">
+                <strong>Tình huống thực tế:</strong><br />
+                • If I were you, I would apologize.<br />
+                • If we had more money, we would travel more.<br />
+                • If she were here, she would help us.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                Các biến thể với modal verbs
+              </div>
+              <div class="card-content">
+                <strong>Would/Could/Might + V:</strong><br />
+                • <span class="highlight">would</span> = chắc chắn xảy ra<br />
+                • <span class="highlight">could</span> = có thể, có khả năng<br />
+                • <span class="highlight">might</span> = có thể (ít chắc chắn
+                hơn)
+              </div>
+              <div class="example">
+                <strong>So sánh:</strong><br />
+                • If I won the lottery, I would quit my job. (chắc chắn)<br />
+                • If I won the lottery, I could quit my job. (có thể)<br />
+                • If I won the lottery, I might quit my job. (không chắc)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">💫</div>
+                Cấu trúc đặc biệt
+              </div>
+              <div class="card-content">
+                <strong>1. If I were you:</strong><br />
+                <span class="highlight">If I were you, I would...</span
+                ><br /><br />
+                <strong>2. Wish (ước):</strong><br />
+                <span class="highlight">S + wish + S + V2/ed</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • If I were you, I would study medicine.<br />
+                • I wish I had a bigger house.<br />
+                • She wishes she could speak French.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOẠI 3 -->
+        <div class="section" id="type3">
+          <h2 class="section-title">3️⃣ CÂU ĐIỀU KIỆN LOẠI 3</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">3️⃣</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="card-content">
+                <strong>If clause:</strong>
+                <span class="highlight">If + S + had + V3/ed</span><br />
+                <strong>Main clause:</strong>
+                <span class="highlight">S + would have + V3/ed</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • If I had studied harder, I would have passed the exam.<br />
+                • If she had known, she would have come.<br />
+                • If they had left earlier, they wouldn't have missed the train.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⏰</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">🎯 Sử dụng khi:</div>
+                • Diễn tả điều kiện không có thật trong quá khứ<br />
+                • Hối tiếc về việc đã không làm trong quá khứ<br />
+                • Phê bình, chỉ trích về hành động trong quá khứ<br />
+                • Đưa ra lời giải thích cho sự việc đã xảy ra
+              </div>
+              <div class="example">
+                <strong>Tình huống thực tế:</strong><br />
+                • If I had known you were sick, I would have visited you.<br />
+                • If he had driven carefully, he wouldn't have had an
+                accident.<br />
+                • If we had taken a map, we wouldn't have gotten lost.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                Các biến thể với modal verbs
+              </div>
+              <div class="card-content">
+                <strong>Would/Could/Might have + V3:</strong><br />
+                • <span class="highlight">would have</span> = chắc chắn xảy
+                ra<br />
+                • <span class="highlight">could have</span> = có thể, có khả
+                năng<br />
+                • <span class="highlight">might have</span> = có thể (ít chắc
+                chắn hơn)
+              </div>
+              <div class="example">
+                <strong>So sánh:</strong><br />
+                • If I had known, I would have helped. (chắc chắn)<br />
+                • If I had known, I could have helped. (có thể)<br />
+                • If I had known, I might have helped. (không chắc)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">💭</div>
+                Cấu trúc đặc biệt
+              </div>
+              <div class="card-content">
+                <strong>1. Wish (ước trong quá khứ):</strong><br />
+                <span class="highlight">S + wish + S + had + V3/ed</span
+                ><br /><br />
+                <strong>2. If only (Giá mà):</strong><br />
+                <span class="highlight">If only + S + had + V3/ed</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I wish I had studied harder for the test.<br />
+                • If only I had listened to your advice.<br />
+                • She wishes she had taken that job offer.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HỖN HỢP -->
+        <div class="section" id="mixed">
+          <h2 class="section-title">🔀 CÂU ĐIỀU KIỆN HỖN HỢP</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔀</div>
+                Loại hỗn hợp 1: Quá khứ - Hiện tại
+              </div>
+              <div class="card-content">
+                <strong>If clause:</strong>
+                <span class="highlight">If + S + had + V3/ed</span><br />
+                <strong>Main clause:</strong>
+                <span class="highlight">S + would + V</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • If I had studied medicine, I would be a doctor now.<br />
+                • If you had saved money, you could buy a house today.<br />
+                • If she had learned to drive, she wouldn't need to take the
+                bus.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                Loại hỗn hợp 2: Hiện tại - Quá khứ
+              </div>
+              <div class="card-content">
+                <strong>If clause:</strong>
+                <span class="highlight">If + S + V2/ed</span><br />
+                <strong>Main clause:</strong>
+                <span class="highlight">S + would have + V3/ed</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • If I were smarter, I would have gone to university.<br />
+                • If she liked children, she would have become a teacher.<br />
+                • If he had more time, he would have finished the project.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Cách dùng chi tiết
+              </div>
+              <div class="usage-box">
+                <div class="usage-title">💡 Sử dụng khi:</div>
+                • Kết quả ở hiện tại của điều kiện trong quá khứ<br />
+                • Kết quả trong quá khứ của điều kiện ở hiện tại<br />
+                • Diễn tả sự hối tiếc với tình huống hiện tại<br />
+                • Giải thích tình huống hiện tại bằng điều kiện quá khứ
+              </div>
+              <div class="example">
+                <strong>Tình huống thực tế:</strong><br />
+                • If I had taken that job, I would be living in Paris now.<br />
+                • If I were more confident, I would have asked for a
+                promotion.<br />
+                • If you weren't so stubborn, we wouldn't have argued yesterday.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Lưu ý quan trọng
+              </div>
+              <div class="warning-note">
+                <strong>Chú ý khi sử dụng:</strong><br /><br />
+                • Câu điều kiện hỗn hợp cần đảm bảo logic về thời gian<br />
+                • Mệnh đề If thường diễn tả điều kiện trái với quá khứ<br />
+                • Mệnh đề chính diễn tả kết quả trái với hiện tại<br />
+                • Cần chú ý đến ngữ cảnh để sử dụng cho phù hợp
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ĐẶC BIỆT -->
+        <div class="section" id="special">
+          <h2 class="section-title">⭐ CÂU ĐIỀU KIỆN ĐẶC BIỆT</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔁</div>
+                Đảo ngữ trong câu điều kiện
+              </div>
+              <div class="card-content">
+                <strong>Loại 1:</strong>
+                <span class="highlight">Should + S + V, S + will + V</span
+                ><br /><br />
+                <strong>Loại 2:</strong>
+                <span class="highlight">Were + S + to V, S + would + V</span
+                ><br /><br />
+                <strong>Loại 3:</strong>
+                <span class="highlight"
+                  >Had + S + V3/ed, S + would have + V3/ed</span
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Should you see Tom, tell him to call me.<br />
+                • Were I you, I would accept the offer.<br />
+                • Had I known, I would have helped.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔀</div>
+                Unless, Provided that, As long as
+              </div>
+              <div class="card-content">
+                <strong>Unless = If not:</strong>
+                <span class="highlight">Unless + S + V</span><br /><br />
+                <strong>Provided that:</strong>
+                <span class="highlight">Provided that + S + V</span><br /><br />
+                <strong>As long as:</strong>
+                <span class="highlight">As long as + S + V</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Unless you study, you'll fail. = If you don't study, you'll
+                fail.<br />
+                • I'll help provided that you try.<br />
+                • You can go as long as you finish your homework.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">💭</div>
+                Suppose/Supposing, What if
+              </div>
+              <div class="card-content">
+                <strong>Suppose/Supposing:</strong>
+                <span class="highlight">Suppose/Supposing + S + V, ...</span
+                ><br /><br />
+                <strong>What if:</strong>
+                <span class="highlight">What if + S + V, ...</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Suppose you won the lottery, what would you do?<br />
+                • Supposing it rains, what will we do?<br />
+                • What if she doesn't come, should we start without her?
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                But for, Without, Otherwise
+              </div>
+              <div class="card-content">
+                <strong>But for:</strong>
+                <span class="highlight"
+                  >But for + N, S + would have + V3/ed</span
+                ><br /><br />
+                <strong>Without:</strong>
+                <span class="highlight">Without + N, S + would + V</span
+                ><br /><br />
+                <strong>Otherwise:</strong>
+                <span class="highlight">S + V, otherwise + S + would + V</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • But for your help, I would have failed.<br />
+                • Without water, we would die.<br />
+                • I studied hard, otherwise I would have failed.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUYỆN TẬP -->
+        <div class="section" id="practice">
+          <h2 class="section-title">✍️ LUYỆN TẬP CÂU ĐIỀU KIỆN</h2>
+
+          <div class="practice-container">
+            <div class="practice-question">
+              <p>
+                <strong>Câu 1:</strong> Hoàn thành câu sau: If I _____ (have)
+                enough money, I would buy a new car.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer1"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(1, 'had')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result1"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 2:</strong> Hoàn thành câu sau: If she _____ (study)
+                harder, she would have passed the exam.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer2"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(2, 'had studied')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result2"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 3:</strong> Hoàn thành câu sau: If it rains
+                tomorrow, we _____ (cancel) the picnic.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer3"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(3, 'will cancel')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result3"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 4:</strong> Viết lại câu sử dụng unless: You will
+                fail if you don't study.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer4"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(4, 'You will fail unless you study.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result4"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 5:</strong> Chuyển sang câu điều kiện: I didn't know
+                you were coming, so I didn't wait for you.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer5"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(5, 'If I had known you were coming, I would have waited for you.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result5"></div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📝 Mẹo làm bài:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>Xác định loại câu điều kiện dựa trên ngữ cảnh</li>
+              <li>Nhớ công thức của từng loại điều kiện</li>
+              <li>Chú ý đến dấu hiệu thời gian trong câu</li>
+              <li>Với unless, nhớ rằng unless = if not</li>
+              <li>Kiểm tra lại thì của động trước khi kết luận</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+      function showSection(sectionId) {
+        // Ẩn tất cả các section
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Hiển thị section được chọn
+        document.getElementById(sectionId).classList.add("active");
+
+        // Cập nhật trạng thái active cho nút
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Tìm nút tương ứng với section được chọn và thêm class active
+        document
+          .querySelector(`.nav-btn[onclick="showSection('${sectionId}')"]`)
+          .classList.add("active");
+
+        // Cuộn lên đầu trang
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function checkAnswer(questionNum, correctAnswer) {
+        const userAnswer = document
+          .getElementById(`answer${questionNum}`)
+          .value.trim();
+        const resultElement = document.getElementById(`result${questionNum}`);
+
+        // Chuẩn hóa câu trả lời: bỏ khoảng trắng thừa, chuyển về chữ thường
+        const normalizedUserAnswer = userAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ");
+        const normalizedCorrectAnswer = correctAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ");
+
+        if (normalizedUserAnswer === normalizedCorrectAnswer) {
+          resultElement.textContent = "✓ Chính xác! Câu trả lời của Em đúng.";
+          resultElement.className = "result-feedback correct";
+        } else {
+          resultElement.textContent = `✗ Chưa chính xác. Đáp án đúng là: "${correctAnswer}"`;
+          resultElement.className = "result-feedback incorrect";
+        }
+
+        resultElement.style.display = "block";
+      }
+
+      // Hiển thị nút back to top khi cuộn
+      window.onscroll = function () {
+        const backToTopButton = document.querySelector(".back-to-top");
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      };
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

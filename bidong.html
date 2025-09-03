@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Câu bị động - Passive Voice</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: #333;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.98);
+        min-height: 100vh;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 70px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="4" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 10s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .hero-subtitle {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        position: relative;
+      }
+
+      .nav-section {
+        background: white;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .nav-btn {
+        padding: 14px 16px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 8px 25px rgba(106, 17, 203, 0.4);
+        background: linear-gradient(135deg, #2575fc, #6a11cb);
+      }
+
+      .content-section {
+        padding: 40px;
+      }
+
+      .section {
+        display: none;
+        animation: slideIn 0.5s ease;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border-radius: 2px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .content-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid #6a11cb;
+      }
+
+      .content-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card-icon {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+
+      .formula {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 1.1rem;
+        color: #333;
+        border-left: 4px solid #6a11cb;
+        margin: 15px 0;
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .example {
+        background: #e8f4fd;
+        border-left: 4px solid #2575fc;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+        font-style: italic;
+      }
+
+      .rule-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 5px solid #e17055;
+      }
+
+      .rule-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin: 25px 0;
+      }
+
+      .change-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .change-table th {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .change-table td {
+        padding: 15px;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .change-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .important-note {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #155724;
+      }
+
+      .warning-note {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        border: 2px solid #dc3545;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #721c24;
+      }
+
+      .quick-reference {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        border-left: 6px solid #2196f3;
+      }
+
+      .quick-reference h3 {
+        color: #1976d2;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+      }
+
+      .practice-container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .practice-question {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .practice-question:last-child {
+        border-bottom: none;
+      }
+
+      .practice-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .practice-input:focus {
+        border-color: #6a11cb;
+        outline: none;
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #00b894, #00cec9);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 15px;
+        transition: all 0.3s;
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+      }
+
+      .result-feedback {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+      }
+
+      .correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 8px 25px rgba(106, 17, 203, 0.4);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(106, 17, 203, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-section {
+          padding: 20px;
+        }
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-title {
+          font-size: 2rem;
+        }
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-section">
+        <h1 class="hero-title">🔄 CÂU BỊ ĐỘNG</h1>
+        <p class="hero-subtitle">
+          Passive Voice - Học một cách dễ hiểu và đầy đủ
+        </p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-grid">
+          <button class="nav-btn active" onclick="showSection('overview')">
+            📖 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('structure')">
+            🏗️ Cấu trúc
+          </button>
+          <button class="nav-btn" onclick="showSection('usage')">
+            🎯 Cách dùng
+          </button>
+          <button class="nav-btn" onclick="showSection('tenses')">
+            ⏰ Thì động từ
+          </button>
+          <button class="nav-btn" onclick="showSection('special')">
+            ⭐ Đặc biệt
+          </button>
+          <button class="nav-btn" onclick="showSection('practice')">
+            ✍️ Luyện tập
+          </button>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <!-- TỔNG QUAN -->
+        <div class="section active" id="overview">
+          <h2 class="section-title">📖 TỔNG QUAN VỀ CÂU BỊ ĐỘNG</h2>
+
+          <div class="quick-reference">
+            <h3>🎯 Câu bị động là gì?</h3>
+            <p>
+              <strong>Câu bị động (Passive Voice)</strong> là cách diễn đạt mà
+              chủ ngữ là người hoặc vật chịu tác động của hành động, thay vì
+              thực hiện hành động như trong câu chủ động.
+            </p>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                So sánh câu chủ động và bị động
+              </div>
+              <div class="formula">
+                <strong>Câu chủ động:</strong> S + V + O<br />
+                <strong>Câu bị động:</strong>
+                <span class="highlight">S + be + V3/ed + (by O)</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Chủ động: She writes a letter.<br />
+                • Bị động: A letter is written by her.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Cấu trúc chung
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Công thức cơ bản:</div>
+                • <strong>Chủ động:</strong> S + V + O<br />
+                • <strong>Bị động:</strong> S + be + V3/ed + (by O)
+              </div>
+              <div class="example">
+                <strong>Lưu ý:</strong><br />
+                • Động từ "to be" phải phù hợp với thì của câu<br />
+                • Động từ chính được chuyển thành V3/ed (quá khứ phân từ)
+              </div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📌 Khi nào dùng câu bị động:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>
+                Khi không biết hoặc không quan trọng ai thực hiện hành động
+              </li>
+              <li>Khi muốn nhấn mạnh đối tượng chịu tác động</li>
+              <li>
+                Khi chủ ngữ là người/vật không xác định (someone, people...)
+              </li>
+              <li>Trong văn phong khoa học, báo chí, mô tả quy trình</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CẤU TRÚC -->
+        <div class="section" id="structure">
+          <h2 class="section-title">🏗️ CẤU TRÚC CÂU BỊ ĐỘNG</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔧</div>
+                Công thức chung
+              </div>
+              <div class="formula">
+                <strong>S + be + V3/ed + (by O)</strong>
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Các bước chuyển đổi:</div>
+                1. Xác định tân ngữ trong câu chủ động → làm chủ ngữ câu bị
+                động<br />
+                2. Xác định thì của động từ → chọn dạng "to be" phù hợp<br />
+                3. Chuyển động từ chính → V3/ed (quá khứ phân từ)<br />
+                4. Chuyển chủ ngữ → by + tân ngữ (nếu cần)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📋</div>
+                Ví dụ minh họa
+              </div>
+              <div class="example">
+                <strong>Hiện tại đơn:</strong><br />
+                • Chủ động: She delivers the mail.<br />
+                • Bị động: The mail is delivered by her.<br /><br />
+
+                <strong>Quá khứ đơn:</strong><br />
+                • Chủ động: He fixed the car.<br />
+                • Bị động: The car was fixed by him.<br /><br />
+
+                <strong>Tương lai đơn:</strong><br />
+                • Chủ động: They will build a house.<br />
+                • Bị động: A house will be built by them.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Lưu ý quan trọng
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Khi chuyển đổi cần chú ý:</div>
+                • Chỉ các ngoại động từ (có tân ngữ) mới chuyển được sang bị
+                động<br />
+                • Các nội động từ (không có tân ngữ) không chuyển được<br />
+                • "By" có thể được bỏ khi chủ ngữ không xác định hoặc không quan
+                trọng
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Câu không thể chuyển: He sleeps. (sleep là nội động từ)<br />
+                • Bỏ "by": The window was broken. (không rõ ai làm)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔍</div>
+                Câu bị động với động từ có hai tân ngữ
+              </div>
+              <div class="formula">
+                <strong>S + V + O1 + O2</strong><br />
+                → Có 2 cách chuyển sang bị động
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Chủ động: He gave me a book.<br />
+                • Bị động 1: I was given a book by him.<br />
+                • Bị động 2: A book was given to me by him.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Động từ thường gặp:</div>
+                give, send, show, lend, tell, buy, bring,...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CÁCH DÙNG -->
+        <div class="section" id="usage">
+          <h2 class="section-title">🎯 CÁCH DÙNG CÂU BỊ ĐỘNG</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Khi không biết người thực hiện
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • My bike was stolen last night.<br />
+                → Tôi không biết ai lấy trộm<br /><br />
+                • This house was built in 1990.<br />
+                → Không biết ai xây ngôi nhà này
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Thường dùng khi:</div>
+                • Không biết ai thực hiện hành động<br />
+                • Không thể xác định người thực hiện<br />
+                • Người thực hiện không quan trọng
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🌟</div>
+                Khi muốn nhấn mạnh đối tượng chịu tác động
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Ten people were injured in the accident.<br />
+                → Nhấn mạnh vào người bị thương<br /><br />
+                • The new library will be opened by the mayor.<br />
+                → Nhấn mạnh vào thư viện mới
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Thường dùng khi:</div>
+                • Đối tượng chịu tác động quan trọng hơn<br />
+                • Muốn tập trung sự chú ý vào đối tượng bị tác động
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Trong văn phong trang trọng
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • You are requested to remain seated.<br />
+                → Trang trọng hơn "Please remain seated"<br /><br />
+                • It is believed that the weather will improve.<br />
+                → Trang trọng hơn "People believe that..."
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Thường dùng trong:</div>
+                • Thông báo, thông báo chính thức<br />
+                • Văn bản khoa học, học thuật<br />
+                • Báo cáo, bài báo
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔧</div>
+                Khi mô tả quy trình
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The coffee beans are harvested and then they are dried.<br />
+                → Mô tả quy trình sản xuất cà phê<br /><br />
+                • First, the ingredients are mixed together. Then the mixture is
+                baked for 30 minutes.<br />
+                → Mô tả quy trình nấu ăn
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Thường dùng trong:</div>
+                • Hướng dẫn, chỉ dẫn<br />
+                • Quy trình sản xuất, chế tạo<br />
+                • Công thức nấu ăn
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THÌ ĐỘNG TỪ -->
+        <div class="section" id="tenses">
+          <h2 class="section-title">⏰ CÂU BỊ ĐỘNG VỚI CÁC THÌ</h2>
+
+          <div class="table-container">
+            <table class="change-table">
+              <thead>
+                <tr>
+                  <th>Thì</th>
+                  <th>Câu chủ động</th>
+                  <th>Câu bị động</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hiện tại đơn</td>
+                  <td>S + V(s/es) + O</td>
+                  <td>S + am/is/are + V3/ed</td>
+                </tr>
+                <tr>
+                  <td>Hiện tại tiếp diễn</td>
+                  <td>S + am/is/are + V-ing + O</td>
+                  <td>S + am/is/are + being + V3/ed</td>
+                </tr>
+                <tr>
+                  <td>Hiện tại hoàn thành</td>
+                  <td>S + have/has + V3/ed + O</td>
+                  <td>S + have/has + been + V3/ed</td>
+                </tr>
+                <tr>
+                  <td>Quá khứ đơn</td>
+                  <td>S + V2/ed + O</td>
+                  <td>S + was/were + V3/ed</td>
+                </tr>
+                <tr>
+                  <td>Quá khứ tiếp diễn</td>
+                  <td>S + was/were + V-ing + O</td>
+                  <td>S + was/were + being + V3/ed</td>
+                </tr>
+                <tr>
+                  <td>Quá khứ hoàn thành</td>
+                  <td>S + had + V3/ed + O</td>
+                  <td>S + had + been + V3/ed</td>
+                </tr>
+                <tr>
+                  <td>Tương lai đơn</td>
+                  <td>S + will + V + O</td>
+                  <td>S + will + be + V3/ed</td>
+                </tr>
+                <tr>
+                  <td>Tương lai gần</td>
+                  <td>S + am/is/are + going to + V + O</td>
+                  <td>S + am/is/are + going to + be + V3/ed</td>
+                </tr>
+                <tr>
+                  <td>Động từ khuyết thiếu</td>
+                  <td>S + can/must/may... + V + O</td>
+                  <td>S + can/must/may... + be + V3/ed</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Ví dụ chi tiết
+              </div>
+              <div class="example">
+                <strong>Hiện tại tiếp diễn:</strong><br />
+                • Chủ động: She is washing the car.<br />
+                • Bị động: The car is being washed by her.<br /><br />
+
+                <strong>Hiện tại hoàn thành:</strong><br />
+                • Chủ động: They have finished the project.<br />
+                • Bị động: The project has been finished by them.<br /><br />
+
+                <strong>Động từ khuyết thiếu:</strong><br />
+                • Chủ động: You must do this exercise.<br />
+                • Bị động: This exercise must be done by you.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Những thì không có dạng bị động
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Các thì không chuyển được:</div>
+                • Hiện tại hoàn thành tiếp diễn<br />
+                • Quá khứ hoàn thành tiếp diễn<br />
+                • Tương lai tiếp diễn<br />
+                • Tương lai hoàn thành tiếp diễn
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She has been reading a book. → Không có dạng bị động<br />
+                • They will be watching TV. → Không có dạng bị động
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ĐẶC BIỆT -->
+        <div class="section" id="special">
+          <h2 class="section-title">⭐ CẤU TRÚC BỊ ĐỘNG ĐẶC BIỆT</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔠</div>
+                Câu bị động với động từ tường thuật
+              </div>
+              <div class="formula">
+                <strong>S + V + that + clause</strong><br />
+                → <strong>It + be + V3/ed + that + clause</strong><br />
+                → <strong>S + be + V3/ed + to V</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • People say that he is rich.<br />
+                → It is said that he is rich.<br />
+                → He is said to be rich.<br /><br />
+
+                • They believe that she is innocent.<br />
+                → It is believed that she is innocent.<br />
+                → She is believed to be innocent.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                Câu nhờ vả (Causative form)
+              </div>
+              <div class="formula">
+                <strong>Chủ động:</strong> S + have + O + V<br />
+                <strong>Bị động:</strong> S + have + O + V3/ed
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I have him repair my car.<br />
+                → I have my car repaired.<br /><br />
+
+                • She had them clean the house.<br />
+                → She had the house cleaned.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Động từ nhờ vả:</div>
+                have, get, make, help, let
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">❓</div>
+                Câu hỏi bị động
+              </div>
+              <div class="formula">
+                <strong>Yes/No questions:</strong><br />
+                Be + S + V3/ed?<br /><br />
+                <strong>Wh-questions:</strong><br />
+                Wh-word + be + S + V3/ed?
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Is English spoken here?<br />
+                • When was this house built?<br />
+                • How was the window broken?<br />
+                • Where are cars manufactured?
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Câu bị động với V-ing và to-V
+              </div>
+              <div class="formula">
+                <strong>V-ing:</strong> S + V + V-ing<br />
+                → <strong>V-ing + be + V3/ed</strong><br /><br />
+                <strong>To-V:</strong> S + V + to-V<br />
+                → <strong>To-V + be + V3/ed</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I remember someone taking my book.<br />
+                → I remember my book being taken.<br /><br />
+
+                • She wants to clean the room.<br />
+                → She wants the room to be cleaned.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUYỆN TẬP -->
+        <div class="section" id="practice">
+          <h2 class="section-title">✍️ LUYỆN TẬP CÂU BỊ ĐỘNG</h2>
+
+          <div class="practice-container">
+            <div class="practice-question">
+              <p>
+                <strong>Câu 1:</strong> Chuyển sang câu bị động: "They built
+                this house in 1990."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer1"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(1, 'This house was built in 1990.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result1"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 2:</strong> Chuyển sang câu bị động: "She is writing
+                a letter now."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer2"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(2, 'A letter is being written by her now.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result2"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 3:</strong> Chuyển sang câu bị động: "They have
+                finished the project."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer3"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(3, 'The project has been finished by them.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result3"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 4:</strong> Chuyển sang câu bị động: "We will hold
+                the meeting tomorrow."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer4"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(4, 'The meeting will be held tomorrow.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result4"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 5:</strong> Chuyển sang câu bị động: "You must
+                complete this form."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer5"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(5, 'This form must be completed.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result5"></div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📝 Mẹo làm bài:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>Xác định thì của động từ trong câu chủ động</li>
+              <li>Chọn dạng "to be" phù hợp với thì và chủ ngữ mới</li>
+              <li>Chuyển động từ chính thành quá khứ phân từ (V3/ed)</li>
+              <li>Đặt "by + tân ngữ" khi cần thiết</li>
+              <li>Kiểm tra lại ngữ pháp và thì của câu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+      function showSection(sectionId) {
+        // Ẩn tất cả các section
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Hiển thị section được chọn
+        document.getElementById(sectionId).classList.add("active");
+
+        // Cập nhật trạng thái active cho nút
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Tìm nút tương ứng với section được chọn và thêm class active
+        document
+          .querySelector(`.nav-btn[onclick="showSection('${sectionId}')"]`)
+          .classList.add("active");
+
+        // Cuộn lên đầu trang
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function checkAnswer(questionNum, correctAnswer) {
+        const userAnswer = document
+          .getElementById(`answer${questionNum}`)
+          .value.trim();
+        const resultElement = document.getElementById(`result${questionNum}`);
+
+        // Chuẩn hóa câu trả lời: bỏ khoảng trắng thừa, chuyển về chữ thường
+        const normalizedUserAnswer = userAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ");
+        const normalizedCorrectAnswer = correctAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ");
+
+        if (normalizedUserAnswer === normalizedCorrectAnswer) {
+          resultElement.textContent = "✓ Chính xác! Câu trả lời của Em đúng.";
+          resultElement.className = "result-feedback correct";
+        } else {
+          resultElement.textContent = `✗ Chưa chính xác. Đáp án đúng là: "${correctAnswer}"`;
+          resultElement.className = "result-feedback incorrect";
+        }
+
+        resultElement.style.display = "block";
+      }
+
+      // Hiển thị nút back to top khi cuộn
+      window.onscroll = function () {
+        const backToTopButton = document.querySelector(".back-to-top");
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      };
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

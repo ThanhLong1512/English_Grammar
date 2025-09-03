@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Động từ Khiếm khuyết - Modal Verbs</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f5f7fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      header {
+        background: linear-gradient(135deg, #4e54c8, #8f94fb);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      nav {
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+      }
+
+      .nav-link {
+        padding: 1rem 1.5rem;
+        display: inline-block;
+        color: #4e54c8;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: #f0f2ff;
+      }
+
+      section {
+        padding: 3rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        color: #4e54c8;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+
+      .intro-text {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+        font-size: 1.1rem;
+      }
+
+      .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card-header {
+        background: linear-gradient(135deg, #4e54c8, #8f94fb);
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .example {
+        background-color: #f9f9f9;
+        border-left: 4px solid #4e54c8;
+        padding: 1rem;
+        margin: 1rem 0;
+        font-style: italic;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+        background-color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      th {
+        background-color: #4e54c8;
+        color: white;
+      }
+
+      tr:hover {
+        background-color: #f5f7fa;
+      }
+
+      .quiz-container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin: 2rem auto;
+        max-width: 800px;
+      }
+
+      .question {
+        margin-bottom: 1.5rem;
+      }
+
+      .options label {
+        display: block;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        background-color: #f5f7fa;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .options label:hover {
+        background-color: #e0e5ff;
+      }
+
+      button {
+        background: linear-gradient(135deg, #4e54c8, #8f94fb);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 3rem;
+      }
+
+      @media (max-width: 768px) {
+        .card-container {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Động từ Khiếm khuyết</h1>
+        <p class="subtitle">
+          Tìm hiểu về Modal Verbs trong tiếng Anh: Cách sử dụng, ý nghĩa và ví
+          dụ minh họa
+        </p>
+      </div>
+    </header>
+
+    <nav>
+      <div class="container nav-container">
+        <a href="#intro" class="nav-link">Giới thiệu</a>
+        <a href="#list" class="nav-link">Các động từ</a>
+        <a href="#usage" class="nav-link">Cách dùng</a>
+        <a href="#examples" class="nav-link">Ví dụ</a>
+        <a href="#quiz" class="nav-link">Bài tập</a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section id="intro">
+        <h2 class="section-title">Động từ Khiếm khuyết là gì?</h2>
+        <p class="intro-text">
+          Động từ khiếm khuyết (Modal Verbs) là những động từ đặc biệt trong
+          tiếng Anh được sử dụng để diễn tả khả năng, sự cho phép, bổn phận, khả
+          năng, v.v. Chúng không thay đổi theo chủ ngữ và luôn được theo sau bởi
+          một động từ nguyên thể không "to".
+        </p>
+
+        <div class="card-container">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Đặc điểm</h3>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Không thay đổi theo ngôi hoặc số</li>
+                <li>Luôn được theo sau bởi động từ nguyên thể không "to"</li>
+                <li>Không có dạng nguyên thể, phân từ hay danh động từ</li>
+                <li>
+                  Được sử dụng để tạo câu hỏi và câu phủ định mà không cần trợ
+                  động từ
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Công thức</h3>
+            </div>
+            <div class="card-body">
+              <p>
+                <strong>Khẳng định:</strong> Chủ ngữ + Modal Verb + Động từ
+                nguyên thể
+              </p>
+              <p class="example">She can speak French.</p>
+
+              <p>
+                <strong>Phủ định:</strong> Chủ ngữ + Modal Verb + not + Động từ
+                nguyên thể
+              </p>
+              <p class="example">You must not smoke here.</p>
+
+              <p>
+                <strong>Nghi vấn:</strong> Modal Verb + Chủ ngữ + Động từ nguyên
+                thể?
+              </p>
+              <p class="example">Should I call him?</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="list">
+        <h2 class="section-title">Các Động từ Khiếm khuyết phổ biến</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Động từ</th>
+              <th>Ý nghĩa</th>
+              <th>Ví dụ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Can</td>
+              <td>Khả năng, xin phép</td>
+              <td>I can swim.</td>
+            </tr>
+            <tr>
+              <td>Could</td>
+              <td>Khả năng trong quá khứ, yêu cầu lịch sự</td>
+              <td>She could play piano when she was five.</td>
+            </tr>
+            <tr>
+              <td>May</td>
+              <td>Xin phép, khả năng xảy ra</td>
+              <td>May I leave early?</td>
+            </tr>
+            <tr>
+              <td>Might</td>
+              <td>Khả năng xảy ra thấp</td>
+              <td>It might rain tomorrow.</td>
+            </tr>
+            <tr>
+              <td>Must</td>
+              <td>Bắt buộc, suy đoán chắc chắn</td>
+              <td>You must wear a seatbelt.</td>
+            </tr>
+            <tr>
+              <td>Shall</td>
+              <td>Đề nghị, gợi ý (thường dùng với I/we)</td>
+              <td>Shall we dance?</td>
+            </tr>
+            <tr>
+              <td>Should</td>
+              <td>Lời khuyên, bổn phận</td>
+              <td>You should see a doctor.</td>
+            </tr>
+            <tr>
+              <td>Will</td>
+              <td>Tương lai, yêu cầu lịch sự</td>
+              <td>I will help you.</td>
+            </tr>
+            <tr>
+              <td>Would</td>
+              <td>Yêu cầu lịch sự, thói quen quá khứ</td>
+              <td>Would you mind opening the window?</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="usage">
+        <h2 class="section-title">Cách sử dụng chi tiết</h2>
+
+        <div class="card-container">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Diễn tả khả năng</h3>
+            </div>
+            <div class="card-body">
+              <p><strong>Can, Could, Be able to</strong></p>
+              <p class="example">
+                - I can play the guitar.<br />- She could speak French when she
+                was young.<br />- They will be able to come tomorrow.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Diễn tả sự cho phép</h3>
+            </div>
+            <div class="card-body">
+              <p><strong>Can, Could, May, Might</strong></p>
+              <p class="example">
+                - You can use my phone.<br />- Could I borrow your pen?<br />-
+                May I leave the table?
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Diễn tả bổn phận</h3>
+            </div>
+            <div class="card-body">
+              <p><strong>Must, Have to, Should</strong></p>
+              <p class="example">
+                - You must finish your homework.<br />- We have to wear a
+                uniform at school.<br />- You should apologize to her.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Diễn tả khả năng xảy ra</h3>
+            </div>
+            <div class="card-body">
+              <p><strong>May, Might, Could, Must</strong></p>
+              <p class="example">
+                - It may rain later.<br />- She might be at home.<br />- He must
+                be tired after working all day.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="examples">
+        <h2 class="section-title">Ví dụ minh họa</h2>
+
+        <div class="card-container">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Can</h3>
+              <p class="example">
+                - I can swim. (Tôi có thể bơi)<br />- Can I use your phone? (Tôi
+                dùng điện thoại của Em được không?)
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Could</h3>
+              <p class="example">
+                - I could run fast when I was young. (Tôi có thể chạy nhanh khi
+                còn trẻ)<br />- Could you help me? (Em có thể giúp tôi không?)
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Should</h3>
+              <p class="example">
+                - You should study harder. (Em nên học chăm chỉ hơn)<br />-
+                Should we tell her? (Chúng ta có nên nói với cô ấy không?)
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Must</h3>
+              <p class="example">
+                - You must stop at a red light. (Em phải dừng lại khi đèn đỏ)<br />-
+                He must be at home. (Chắc hẳn anh ấy đang ở nhà)
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz">
+        <h2 class="section-title">Bài tập thực hành</h2>
+
+        <div class="quiz-container">
+          <div class="question">
+            <p>
+              <strong>Câu 1:</strong> Chọn động từ khiếm khuyết phù hợp: "You
+              ______ finish your homework before watching TV."
+            </p>
+            <div class="options">
+              <label><input type="radio" name="q1" value="a" /> a) can</label>
+              <label><input type="radio" name="q1" value="b" /> b) may</label>
+              <label><input type="radio" name="q1" value="c" /> c) must</label>
+              <label><input type="radio" name="q1" value="d" /> d) could</label>
+            </div>
+          </div>
+
+          <div class="question">
+            <p>
+              <strong>Câu 2:</strong> Chọn động từ khiếm khuyết phù hợp: "______
+              I borrow your pen, please?"
+            </p>
+            <div class="options">
+              <label><input type="radio" name="q2" value="a" /> a) Must</label>
+              <label
+                ><input type="radio" name="q2" value="b" /> b) Should</label
+              >
+              <label><input type="radio" name="q2" value="c" /> c) May</label>
+              <label><input type="radio" name="q2" value="d" /> d) Would</label>
+            </div>
+          </div>
+
+          <div class="question">
+            <p>
+              <strong>Câu 3:</strong> Chọn động từ khiếm khuyết phù hợp: "She
+              ______ speak three languages fluently."
+            </p>
+            <div class="options">
+              <label><input type="radio" name="q3" value="a" /> a) must</label>
+              <label><input type="radio" name="q3" value="b" /> b) can</label>
+              <label
+                ><input type="radio" name="q3" value="c" /> c) should</label
+              >
+              <label><input type="radio" name="q3" value="d" /> d) would</label>
+            </div>
+          </div>
+
+          <button onclick="checkAnswers()">Kiểm tra kết quả</button>
+          <p id="result" style="margin-top: 1rem; font-weight: bold"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>© 2023 Trang web học tiếng Anh | Động từ Khiếm khuyết</p>
+        <p>Kiến thức về Modal Verbs và cách sử dụng</p>
+      </div>
+    </footer>
+
+    <script>
+      function checkAnswers() {
+        const answers = {
+          q1: "c",
+          q2: "c",
+          q3: "b",
+        };
+
+        let score = 0;
+        let total = Object.keys(answers).length;
+
+        for (let question in answers) {
+          const selected = document.querySelector(
+            `input[name="${question}"]:checked`
+          );
+          if (selected && selected.value === answers[question]) {
+            score++;
+          }
+        }
+
+        const resultElement = document.getElementById("result");
+        resultElement.textContent = `Em đã đúng ${score} trên ${total} câu!`;
+
+        if (score === total) {
+          resultElement.style.color = "#4CAF50";
+        } else {
+          resultElement.style.color = "#F44336";
+        }
+      }
+    </script>
+  </body>
+</html>

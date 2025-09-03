@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mệnh đề quan hệ - Relative Clauses</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+        color: #333;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.98);
+        min-height: 100vh;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+        color: white;
+        padding: 70px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="4" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 10s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .hero-subtitle {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        position: relative;
+      }
+
+      .nav-section {
+        background: white;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .nav-btn {
+        padding: 14px 16px;
+        background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(142, 45, 226, 0.3);
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 8px 25px rgba(142, 45, 226, 0.4);
+        background: linear-gradient(135deg, #4a00e0, #8e2de2);
+      }
+
+      .content-section {
+        padding: 40px;
+      }
+
+      .section {
+        display: none;
+        animation: slideIn 0.5s ease;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        border-radius: 2px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .content-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid #8e2de2;
+      }
+
+      .content-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card-icon {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+
+      .formula {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 1.1rem;
+        color: #333;
+        border-left: 4px solid #8e2de2;
+        margin: 15px 0;
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .example {
+        background: #e8f4fd;
+        border-left: 4px solid #4a00e0;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+        font-style: italic;
+      }
+
+      .rule-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 5px solid #e17055;
+      }
+
+      .rule-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin: 25px 0;
+      }
+
+      .change-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .change-table th {
+        background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .change-table td {
+        padding: 15px;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .change-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .important-note {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #155724;
+      }
+
+      .warning-note {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        border: 2px solid #dc3545;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #721c24;
+      }
+
+      .quick-reference {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        border-left: 6px solid #2196f3;
+      }
+
+      .quick-reference h3 {
+        color: #1976d2;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+      }
+
+      .practice-container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .practice-question {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .practice-question:last-child {
+        border-bottom: none;
+      }
+
+      .practice-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .practice-input:focus {
+        border-color: #8e2de2;
+        outline: none;
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #00b894, #00cec9);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 15px;
+        transition: all 0.3s;
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+      }
+
+      .result-feedback {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+      }
+
+      .correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 8px 25px rgba(142, 45, 226, 0.4);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(142, 45, 226, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-section {
+          padding: 20px;
+        }
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-title {
+          font-size: 2rem;
+        }
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-section">
+        <h1 class="hero-title">🔗 MỆNH ĐỀ QUAN HỆ</h1>
+        <p class="hero-subtitle">
+          Relative Clauses - Học một cách dễ hiểu và đầy đủ
+        </p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-grid">
+          <button class="nav-btn active" onclick="showSection('overview')">
+            📖 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('defining')">
+            🔍 Xác định
+          </button>
+          <button class="nav-btn" onclick="showSection('non-defining')">
+            🔮 Không xác định
+          </button>
+          <button class="nav-btn" onclick="showSection('relative-pronouns')">
+            📝 Đại từ quan hệ
+          </button>
+          <button class="nav-btn" onclick="showSection('reduction')">
+            ✂️ Rút gọn
+          </button>
+          <button class="nav-btn" onclick="showSection('practice')">
+            ✍️ Luyện tập
+          </button>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <!-- TỔNG QUAN -->
+        <div class="section active" id="overview">
+          <h2 class="section-title">📖 TỔNG QUAN VỀ MỆNH ĐỀ QUAN HỆ</h2>
+
+          <div class="quick-reference">
+            <h3>🎯 Mệnh đề quan hệ là gì?</h3>
+            <p>
+              <strong>Mệnh đề quan hệ (Relative Clauses)</strong> là mệnh đề phụ
+              được dùng để bổ nghĩa cho danh từ đứng trước nó. Mệnh đề quan hệ
+              thường bắt đầu bằng các đại từ quan hệ như who, whom, which, that,
+              whose,...
+            </p>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔗</div>
+                Vai trò của mệnh đề quan hệ
+              </div>
+              <div class="formula">
+                <strong>Danh từ + Đại từ quan hệ + Mệnh đề</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The woman who lives next door is a doctor.<br />
+                → Người phụ nữ mà sống cạnh nhà tôi là bác sĩ.<br /><br />
+                • The book that I bought yesterday is interesting.<br />
+                → Quyển sách mà tôi mua hôm qua thật thú vị.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📊</div>
+                Phân loại mệnh đề quan hệ
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Có 2 loại mệnh đề quan hệ:</div>
+                • <strong>Mệnh đề quan hệ xác định</strong>: Cung cấp thông tin
+                cần thiết để xác định danh từ<br />
+                • <strong>Mệnh đề quan hệ không xác định</strong>: Cung cấp
+                thông tin bổ sung, không cần thiết để xác định danh từ
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Xác định: The man who is standing there is my brother.<br />
+                • Không xác định: Mr. Brown, who is standing there, is my
+                teacher.
+              </div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📌 Các đại từ quan hệ chính:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li><strong>Who</strong>: Thay thế cho người, làm chủ ngữ</li>
+              <li><strong>Whom</strong>: Thay thế cho người, làm tân ngữ</li>
+              <li><strong>Which</strong>: Thay thế cho vật, động vật</li>
+              <li><strong>That</strong>: Thay thế cho cả người và vật</li>
+              <li>
+                <strong>Whose</strong>: Chỉ sở hữu, thay thế cho tính từ sở hữu
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MỆNH ĐỀ QUAN HỆ XÁC ĐỊNH -->
+        <div class="section" id="defining">
+          <h2 class="section-title">🔍 MỆNH ĐỀ QUAN HỆ XÁC ĐỊNH</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Đặc điểm
+              </div>
+              <div class="formula">
+                <strong
+                  >Danh từ + Đại từ quan hệ + Mệnh đề (không có dấu
+                  phẩy)</strong
+                >
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Đặc điểm nhận biết:</div>
+                • Cung cấp thông tin cần thiết để xác định danh từ đứng trước<br />
+                • Không thể bỏ mệnh đề quan hệ mà không làm thay đổi nghĩa của
+                câu<br />
+                • Không có dấu phẩy ngăn cách với mệnh đề chính
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The book that I read was interesting.<br />
+                • People who live in glass houses shouldn't throw stones.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Cách sử dụng
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">
+                  Các đại từ quan hệ trong mệnh đề xác định:
+                </div>
+                • <strong>Who/That</strong>: cho người (làm chủ ngữ)<br />
+                • <strong>Whom/That</strong>: cho người (làm tân ngữ)<br />
+                • <strong>Which/That</strong>: cho vật<br />
+                • <strong>Whose</strong>: chỉ sở hữu
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The woman who/that lives next door is a doctor.<br />
+                • The man whom/that I met yesterday is a famous writer.<br />
+                • The book which/that I bought is expensive.<br />
+                • The boy whose father is a doctor is my friend.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Lưu ý quan trọng
+              </div>
+              <div class="warning-note">
+                <strong>Khi nào dùng "that":</strong><br /><br />
+                • Có thể dùng "that" thay cho who, whom, which trong mệnh đề xác
+                định<br />
+                • Thường dùng "that" sau các từ: all, only, first, last, so sánh
+                nhất, số thứ tự<br />
+                • KHÔNG dùng "that" trong mệnh đề không xác định
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • He is the only person that understands me.<br />
+                • This is the best movie that I have ever seen.<br />
+                • The first thing that you should do is call the police.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔍</div>
+                Khi có thể lược bỏ đại từ quan hệ
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Có thể lược bỏ đại từ quan hệ khi:</div>
+                • Mệnh đề quan hệ xác định<br />
+                • Đại từ quan hệ làm tân ngữ<br />
+                • Không phải là whose
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The woman (whom/who/that) I met yesterday is a doctor.<br />
+                • The book (which/that) I bought is interesting.<br />
+                • The house (that) we rented was beautiful.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MỆNH ĐỀ QUAN HỆ KHÔNG XÁC ĐỊNH -->
+        <div class="section" id="non-defining">
+          <h2 class="section-title">🔮 MỆNH ĐỀ QUAN HỆ KHÔNG XÁC ĐỊNH</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Đặc điểm
+              </div>
+              <div class="formula">
+                <strong>Danh từ + , + Đại từ quan hệ + Mệnh đề + ,</strong>
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Đặc điểm nhận biết:</div>
+                • Cung cấp thông tin bổ sung, không cần thiết để xác định danh
+                từ<br />
+                • Có thể bỏ mệnh đề quan hệ mà không làm thay đổi nghĩa chính
+                của câu<br />
+                • Được ngăn cách với mệnh đề chính bằng dấu phẩy
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • My brother, who lives in London, is a doctor.<br />
+                • Hanoi, which is the capital of Vietnam, is a beautiful city.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Cách sử dụng
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">
+                  Các đại từ quan hệ trong mệnh đề không xác định:
+                </div>
+                • <strong>Who</strong>: cho người (làm chủ ngữ)<br />
+                • <strong>Whom</strong>: cho người (làm tân ngữ)<br />
+                • <strong>Which</strong>: cho vật<br />
+                • <strong>Whose</strong>: chỉ sở hữu<br />
+                • <strong>KHÔNG dùng THAT</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Mr. Brown, who lives next door, is a doctor.<br />
+                • My mother, whom you met yesterday, is a teacher.<br />
+                • This book, which I bought yesterday, is interesting.<br />
+                • John, whose father is a doctor, is my friend.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">ℹ️</div>
+                Khi nào sử dụng
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">
+                  Sử dụng mệnh đề không xác định khi:
+                </div>
+                • Danh từ đứng trước là danh từ riêng<br />
+                • Danh từ đứng trước đã được xác định<br />
+                • Danh từ đứng trước là duy nhất<br />
+                • Bổ sung thông tin thêm về danh từ
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Shakespeare, who wrote Hamlet, was a famous writer.<br />
+                • The Sun, which is a star, provides us with heat and light.<br />
+                • My father, who is 60 years old, is a retired teacher.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Lưu ý quan trọng
+              </div>
+              <div class="warning-note">
+                <strong>Không được lược bỏ đại từ quan hệ:</strong><br /><br />
+                • Trong mệnh đề quan hệ không xác định, không được lược bỏ đại
+                từ quan hệ<br />
+                • Luôn phải có dấu phẩy ngăn cách với mệnh đề chính<br />
+                • Không được dùng "that" thay cho who, whom, which
+              </div>
+              <div class="example">
+                <strong>Ví dụ ĐÚNG:</strong> My brother, who lives in London, is
+                a doctor.<br />
+                <strong>Ví dụ SAI:</strong> My brother, that lives in London, is
+                a doctor.<br />
+                <strong>Ví dụ SAI:</strong> My brother, lives in London, is a
+                doctor.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ĐẠI TỪ QUAN HỆ -->
+        <div class="section" id="relative-pronouns">
+          <h2 class="section-title">📝 ĐẠI TỪ QUAN HỆ VÀ TRẠNG TỪ QUAN HỆ</h2>
+
+          <div class="table-container">
+            <table class="change-table">
+              <thead>
+                <tr>
+                  <th>Đại từ</th>
+                  <th>Cách dùng</th>
+                  <th>Ví dụ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Who</strong></td>
+                  <td>Thay thế cho người, làm chủ ngữ</td>
+                  <td>The woman who lives next door is a doctor.</td>
+                </tr>
+                <tr>
+                  <td><strong>Whom</strong></td>
+                  <td>Thay thế cho người, làm tân ngữ</td>
+                  <td>The man whom you met is my father.</td>
+                </tr>
+                <tr>
+                  <td><strong>Which</strong></td>
+                  <td>Thay thế cho vật, động vật</td>
+                  <td>The book which is on the table is mine.</td>
+                </tr>
+                <tr>
+                  <td><strong>That</strong></td>
+                  <td>
+                    Thay thế cho người/vật (chỉ dùng trong mệnh đề xác định)
+                  </td>
+                  <td>The book that I read was interesting.</td>
+                </tr>
+                <tr>
+                  <td><strong>Whose</strong></td>
+                  <td>Chỉ sở hữu (thay cho his, her, their, its)</td>
+                  <td>The man whose car was stolen reported to the police.</td>
+                </tr>
+                <tr>
+                  <td><strong>Where</strong></td>
+                  <td>Thay thế cho nơi chốn</td>
+                  <td>This is the house where I was born.</td>
+                </tr>
+                <tr>
+                  <td><strong>When</strong></td>
+                  <td>Thay thế cho thời gian</td>
+                  <td>I remember the day when we first met.</td>
+                </tr>
+                <tr>
+                  <td><strong>Why</strong></td>
+                  <td>Thay thế cho lý do</td>
+                  <td>Tell me the reason why you are late.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📍</div>
+                Trạng từ quan hệ: WHERE
+              </div>
+              <div class="formula">
+                <strong>Nơi chốn + where + S + V</strong><br />
+                = <strong>Nơi chốn + in/at/on which + S + V</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • This is the house where I was born.<br />
+                = This is the house in which I was born.<br /><br />
+                • The restaurant where we had dinner was expensive.<br />
+                = The restaurant at which we had dinner was expensive.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⏰</div>
+                Trạng từ quan hệ: WHEN
+              </div>
+              <div class="formula">
+                <strong>Thời gian + when + S + V</strong><br />
+                = <strong>Thời gian + on/in/at which + S + V</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I remember the day when we first met.<br />
+                = I remember the day on which we first met.<br /><br />
+                • July is the month when the weather is hottest.<br />
+                = July is the month in which the weather is hottest.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">❓</div>
+                Trạng từ quan hệ: WHY
+              </div>
+              <div class="formula">
+                <strong>Lý do + why + S + V</strong><br />
+                = <strong>Lý do + for which + S + V</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Tell me the reason why you are late.<br />
+                = Tell me the reason for which you are late.<br /><br />
+                • I don't know the reason why she left.<br />
+                = I don't know the reason for which she left.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Phân biệt WHOSE và OF WHICH
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Cách dùng:</div>
+                • <strong>Whose</strong>: dùng cho cả người và vật<br />
+                • <strong>Of which</strong>: chỉ dùng cho vật (trang trọng)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The man whose car was stolen is my neighbor.<br />
+                • The house whose windows are broken is empty.<br />
+                • The book the cover of which is blue is mine. (trang trọng)<br />
+                • The book whose cover is blue is mine. (ít trang trọng hơn)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RÚT GỌN MỆNH ĐỀ QUAN HỆ -->
+        <div class="section" id="reduction">
+          <h2 class="section-title">✂️ RÚT GỌN MỆNH ĐỀ QUAN HỆ</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📉</div>
+                Rút gọn thành V-ing
+              </div>
+              <div class="formula">
+                <strong>Đại từ quan hệ + V → V-ing</strong><br />
+                (Khi động từ trong mệnh đề quan hệ ở dạng chủ động)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The man who is standing there is my brother.<br />
+                → The man standing there is my brother.<br /><br />
+                • The people who live in this house are friendly.<br />
+                → The people living in this house are friendly.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📈</div>
+                Rút gọn thành V3/ed
+              </div>
+              <div class="formula">
+                <strong>Đại từ quan hệ + be + V3/ed → V3/ed</strong><br />
+                (Khi động từ trong mệnh đề quan hệ ở dạng bị động)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The book which was written by Hemingway is interesting.<br />
+                → The book written by Hemingway is interesting.<br /><br />
+                • The house that was built in 1990 is for sale.<br />
+                → The house built in 1990 is for sale.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📌</div>
+                Rút gọn thành to-V
+              </div>
+              <div class="formula">
+                <strong>Đại từ quan hệ + should/would/can... → to-V</strong
+                ><br />
+                (Sau các từ: first, last, only, so sánh nhất...)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • He is the only person who can help you.<br />
+                → He is the only person to help you.<br /><br />
+                • The first person who arrives will get a prize.<br />
+                → The first person to arrive will get a prize.<br /><br />
+                • The best place where you can stay is this hotel.<br />
+                → The best place to stay is this hotel.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Lưu ý khi rút gọn
+              </div>
+              <div class="warning-note">
+                <strong>Không được rút gọn khi:</strong><br /><br />
+                • Mệnh đề quan hệ không xác định<br />
+                • Động từ trong mệnh đề quan hệ ở thì tiếp diễn hoặc hoàn
+                thành<br />
+                • Trong mệnh đề có các động từ chỉ trạng thái (know, believe,
+                like...)
+              </div>
+              <div class="example">
+                <strong>Ví dụ KHÔNG rút gọn được:</strong><br />
+                • Mr. Brown, who teaches English, is my neighbor.<br />
+                • The book that I have read is interesting.<br />
+                • The girl who knows the answer is my sister.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUYỆN TẬP -->
+        <div class="section" id="practice">
+          <h2 class="section-title">✍️ LUYỆN TẬP MỆNH ĐỀ QUAN HỆ</h2>
+
+          <div class="practice-container">
+            <div class="practice-question">
+              <p>
+                <strong>Câu 1:</strong> Điền đại từ quan hệ thích hợp: The woman
+                ___ lives next door is a doctor.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer1"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(1, 'who')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result1"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 2:</strong> Điền đại từ quan hệ thích hợp: The book
+                ___ I bought yesterday is interesting.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer2"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(2, 'that')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result2"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 3:</strong> Điền đại từ quan hệ thích hợp: This is
+                the house ___ I was born.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer3"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(3, 'where')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result3"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 4:</strong> Rút gọn mệnh đề quan hệ: The man who is
+                standing there is my brother.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer4"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(4, 'The man standing there is my brother.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result4"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 5:</strong> Rút gọn mệnh đề quan hệ: The book which
+                was written by Hemingway is interesting.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer5"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(5, 'The book written by Hemingway is interesting.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result5"></div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📝 Mẹo làm bài:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>Xác định xem danh từ đứng trước là người hay vật</li>
+              <li>
+                Xác định đại từ quan hệ đóng vai trò gì trong mệnh đề (chủ
+                ngữ/tân ngữ)
+              </li>
+              <li>Phân biệt mệnh đề xác định và không xác định</li>
+              <li>Chú ý các trường hợp đặc biệt khi dùng "that"</li>
+              <li>Nhớ các quy tắc rút gọn mệnh đề quan hệ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+      function showSection(sectionId) {
+        // Ẩn tất cả các section
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Hiển thị section được chọn
+        document.getElementById(sectionId).classList.add("active");
+
+        // Cập nhật trạng thái active cho nút
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Tìm nút tương ứng với section được chọn và thêm class active
+        document
+          .querySelector(`.nav-btn[onclick="showSection('${sectionId}')"]`)
+          .classList.add("active");
+
+        // Cuộn lên đầu trang
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function checkAnswer(questionNum, correctAnswer) {
+        const userAnswer = document
+          .getElementById(`answer${questionNum}`)
+          .value.trim();
+        const resultElement = document.getElementById(`result${questionNum}`);
+
+        // Chuẩn hóa câu trả lời: bỏ khoảng trắng thừa, chuyển về chữ thường
+        const normalizedUserAnswer = userAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ");
+        const normalizedCorrectAnswer = correctAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ");
+
+        if (normalizedUserAnswer === normalizedCorrectAnswer) {
+          resultElement.textContent = "✓ Chính xác! Câu trả lời của Em đúng.";
+          resultElement.className = "result-feedback correct";
+        } else {
+          resultElement.textContent = `✗ Chưa chính xác. Đáp án đúng là: "${correctAnswer}"`;
+          resultElement.className = "result-feedback incorrect";
+        }
+
+        resultElement.style.display = "block";
+      }
+
+      // Hiển thị nút back to top khi cuộn
+      window.onscroll = function () {
+        const backToTopButton = document.querySelector(".back-to-top");
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      };
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

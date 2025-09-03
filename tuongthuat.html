@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Câu tường thuật - Reported Speech</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.98);
+        min-height: 100vh;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="50" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="75" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 10s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+      }
+
+      .nav-section {
+        background: white;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .nav-btn {
+        padding: 12px 16px;
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+        background: linear-gradient(135deg, #0984e3, #74b9ff);
+      }
+
+      .content-section {
+        padding: 40px;
+      }
+
+      .section {
+        display: none;
+        animation: slideIn 0.5s ease;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+        border-radius: 2px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .content-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid #74b9ff;
+      }
+
+      .content-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card-icon {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+
+      .formula {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 1rem;
+        color: #333;
+        border-left: 4px solid #74b9ff;
+        margin: 15px 0;
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #00b894, #00cec9);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .example {
+        background: #e8f4fd;
+        border-left: 4px solid #74b9ff;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+        font-style: italic;
+      }
+
+      .rule-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 5px solid #e17055;
+      }
+
+      .rule-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin: 25px 0;
+      }
+
+      .change-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .change-table th {
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+        color: white;
+        padding: 12px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .change-table td {
+        padding: 12px;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .change-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .important-note {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #155724;
+      }
+
+      .warning-note {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        border: 2px solid #dc3545;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #721c24;
+      }
+
+      .quick-reference {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        border-left: 6px solid #2196f3;
+      }
+
+      .quick-reference h3 {
+        color: #1976d2;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+      }
+
+      .practice-container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .practice-question {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .practice-question:last-child {
+        border-bottom: none;
+      }
+
+      .practice-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .practice-input:focus {
+        border-color: #74b9ff;
+        outline: none;
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #00b894, #00cec9);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 15px;
+        transition: all 0.3s;
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+      }
+
+      .result-feedback {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+      }
+
+      .correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-section {
+          padding: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-section">
+        <h1 class="hero-title">🗣️ CÂU TƯỜNG THUẬT</h1>
+        <p class="hero-subtitle">
+          Reported Speech - Học một cách dễ hiểu và đầy đủ
+        </p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-grid">
+          <button class="nav-btn active" onclick="showSection('overview')">
+            📖 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('statements')">
+            💬 Câu trần thuật
+          </button>
+          <button class="nav-btn" onclick="showSection('questions')">
+            ❓ Câu hỏi
+          </button>
+          <button class="nav-btn" onclick="showSection('commands')">
+            📢 Câu mệnh lệnh
+          </button>
+          <button class="nav-btn" onclick="showSection('changes')">
+            🔄 Quy tắc đổi
+          </button>
+          <button class="nav-btn" onclick="showSection('practice')">
+            ✍️ Luyện tập
+          </button>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <!-- TỔNG QUAN -->
+        <div class="section active" id="overview">
+          <h2 class="section-title">📖 TỔNG QUAN VỀ CÂU TƯỜNG THUẬT</h2>
+
+          <div class="quick-reference">
+            <h3>🎯 Câu tường thuật là gì?</h3>
+            <p>
+              <strong>Câu tường thuật (Reported Speech)</strong> là cách diễn tả
+              lại lời nói của người khác mà không dùng dấu ngoặc kép. Chúng ta
+              thường phải thay đổi thì, đại từ, trạng từ chỉ thời gian và nơi
+              chốn.
+            </p>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="formula">
+                <strong>Câu trực tiếp:</strong> S + said, "..."<br />
+                <strong>Câu tường thuật:</strong>
+                <span class="highlight">S + said (that) + S + V</span>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Trực tiếp: He said, "I am tired."<br />
+                • Tường thuật: He said (that) he was tired.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Các động từ tường thuật
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Động từ thường dùng:</div>
+                • <strong>said</strong> - nói (không có tân ngữ)<br />
+                • <strong>told</strong> - nói với ai (có tân ngữ)<br />
+                • <strong>asked</strong> - hỏi<br />
+                • <strong>replied</strong> - trả lời<br />
+                • <strong>explained</strong> - giải thích
+              </div>
+              <div class="example">
+                <strong>Lưu ý:</strong><br />
+                • He <strong>said</strong> he was busy.<br />
+                • He <strong>told me</strong> he was busy.
+              </div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📌 Nguyên tắc cơ bản:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>Lùi thì động từ (backshift of tenses)</li>
+              <li>Đổi đại từ nhân xưng và tính từ sở hữu</li>
+              <li>Đổi trạng từ chỉ thời gian và nơi chốn</li>
+              <li>Bỏ dấu ngoặc kép và có thể thêm "that"</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CÂU TRẦN THUẬT -->
+        <div class="section" id="statements">
+          <h2 class="section-title">💬 CÂU TƯỜNG THUẬT - TRẦN THUẬT</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">💬</div>
+                Cấu trúc
+              </div>
+              <div class="formula">
+                <strong>S + said/told + (that) + S + V (lùi thì)</strong>
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Phân biệt said và told:</div>
+                • <strong>said</strong>: không có tân ngữ trực tiếp<br />
+                • <strong>told</strong>: có tân ngữ trực tiếp (told sb)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⏰</div>
+                Quy tắc lùi thì
+              </div>
+              <div class="table-container">
+                <table class="change-table">
+                  <thead>
+                    <tr>
+                      <th>Câu trực tiếp</th>
+                      <th>Câu tường thuật</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Present Simple</td>
+                      <td>Past Simple</td>
+                    </tr>
+                    <tr>
+                      <td>Present Continuous</td>
+                      <td>Past Continuous</td>
+                    </tr>
+                    <tr>
+                      <td>Present Perfect</td>
+                      <td>Past Perfect</td>
+                    </tr>
+                    <tr>
+                      <td>Past Simple</td>
+                      <td>Past Perfect</td>
+                    </tr>
+                    <tr>
+                      <td>will</td>
+                      <td>would</td>
+                    </tr>
+                    <tr>
+                      <td>can</td>
+                      <td>could</td>
+                    </tr>
+                    <tr>
+                      <td>may</td>
+                      <td>might</td>
+                    </tr>
+                    <tr>
+                      <td>must</td>
+                      <td>had to</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Ví dụ chi tiết
+              </div>
+              <div class="example">
+                <strong>Present Simple → Past Simple:</strong><br />
+                • "I like coffee." → He said he liked coffee.<br /><br />
+                <strong>Present Continuous → Past Continuous:</strong><br />
+                • "I am working." → She said she was working.<br /><br />
+                <strong>Present Perfect → Past Perfect:</strong><br />
+                • "I have finished." → He said he had finished.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Trường hợp không lùi thì
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Không lùi thì khi:</div>
+                • Động từ tường thuật ở hiện tại<br />
+                • Nói về chân lý, sự thật hiển nhiên<br />
+                • Nói về thói quen vẫn đúng ở hiện tại<br />
+                • Nói về tương lai gần
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • He says, "I am busy." → He says he is busy.<br />
+                • She said, "The earth is round." → She said the earth is round.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CÂU HỎI -->
+        <div class="section" id="questions">
+          <h2 class="section-title">❓ CÂU TƯỜNG THUẬT - CÂU HỎI</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">❓</div>
+                Yes/No Questions
+              </div>
+              <div class="formula">
+                <strong>S + asked + if/whether + S + V (lùi thì)</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • "Are you busy?" → He asked if/whether I was busy.<br />
+                • "Did you finish?" → She asked if/whether I had finished.<br />
+                • "Will you come?" → He asked if/whether I would come.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Lưu ý:</div>
+                • Không dùng trợ động từ do/does/did<br />
+                • Đổi thứ tự từ thành câu khẳng định<br />
+                • if = whether (có thể dùng thay thế)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔍</div>
+                Wh-Questions
+              </div>
+              <div class="formula">
+                <strong>S + asked + Wh-word + S + V (lùi thì)</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • "What are you doing?" → He asked what I was doing.<br />
+                • "Where do you live?" → She asked where I lived.<br />
+                • "How did you know?" → He asked how I had known.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Lưu ý:</div>
+                • Giữ nguyên từ để hỏi (what, where, when, why, how...)<br />
+                • Đổi thứ tự thành câu khẳng định<br />
+                • Bỏ trợ động từ do/does/did
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-note">
+            <strong>⚠️ Chú ý quan trọng:</strong> Tránh những lỗi thường gặp như
+            quên lùi thì, không đổi trật tự từ về dạng khẳng định, hoặc quên đổi
+            đại từ và trạng từ chỉ thời gian, nơi chốn.
+          </div>
+        </div>
+
+        <!-- CÂU MỆNH LỆNH -->
+        <div class="section" id="commands">
+          <h2 class="section-title">📢 CÂU TƯỜNG THUẬT - MỆNH LỆNH</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📢</div>
+                Câu mệnh lệnh khẳng định
+              </div>
+              <div class="formula">
+                <strong>S + told/asked + sb + to + V</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • "Open the door!" → He told me to open the door.<br />
+                • "Please help me." → She asked me to help her.<br />
+                • "Study hard!" → The teacher told us to study hard.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🚫</div>
+                Câu mệnh lệnh phủ định
+              </div>
+              <div class="formula">
+                <strong>S + told/asked + sb + not to + V</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • "Don't be late!" → He told me not to be late.<br />
+                • "Please don't smoke." → She asked me not to smoke.<br />
+                • "Don't forget!" → He told me not to forget.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">💡</div>
+                Lời khuyên và gợi ý
+              </div>
+              <div class="formula">
+                <strong>S + advised/suggested + sb + to + V</strong><br />
+                <strong>S + suggested + V-ing</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • "You should rest." → He advised me to rest.<br />
+                • "Let's go home." → She suggested going home.<br />
+                • "Why don't we eat out?" → He suggested eating out.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🙏</div>
+                Lời mời và đề nghị
+              </div>
+              <div class="formula">
+                <strong>S + invited + sb + to + V</strong><br />
+                <strong>S + offered + to + V</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • "Would you like to join us?" → He invited me to join them.<br />
+                • "Shall I help you?" → She offered to help me.<br />
+                • "Come to my party!" → He invited me to his party.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUY TẮC ĐỔI -->
+        <div class="section" id="changes">
+          <h2 class="section-title">🔄 QUY TẮC ĐỔI TRONG CÂU TƯỜNG THUẬT</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">👤</div>
+                Đổi đại từ nhân xưng
+              </div>
+              <div class="table-container">
+                <table class="change-table">
+                  <thead>
+                    <tr>
+                      <th>Trực tiếp</th>
+                      <th>Tường thuật</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>I</td>
+                      <td>he/she</td>
+                    </tr>
+                    <tr>
+                      <td>we</td>
+                      <td>they</td>
+                    </tr>
+                    <tr>
+                      <td>you</td>
+                      <td>I/we</td>
+                    </tr>
+                    <tr>
+                      <td>my</td>
+                      <td>his/her</td>
+                    </tr>
+                    <tr>
+                      <td>our</td>
+                      <td>their</td>
+                    </tr>
+                    <tr>
+                      <td>your</td>
+                      <td>my/our</td>
+                    </tr>
+                    <tr>
+                      <td>me</td>
+                      <td>him/her</td>
+                    </tr>
+                    <tr>
+                      <td>us</td>
+                      <td>them</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⏰</div>
+                Đổi trạng từ thời gian
+              </div>
+              <div class="table-container">
+                <table class="change-table">
+                  <thead>
+                    <tr>
+                      <th>Trực tiếp</th>
+                      <th>Tường thuật</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>now</td>
+                      <td>then</td>
+                    </tr>
+                    <tr>
+                      <td>today</td>
+                      <td>that day</td>
+                    </tr>
+                    <tr>
+                      <td>tonight</td>
+                      <td>that night</td>
+                    </tr>
+                    <tr>
+                      <td>tomorrow</td>
+                      <td>the next day</td>
+                    </tr>
+                    <tr>
+                      <td>yesterday</td>
+                      <td>the day before</td>
+                    </tr>
+                    <tr>
+                      <td>this week</td>
+                      <td>that week</td>
+                    </tr>
+                    <tr>
+                      <td>next week</td>
+                      <td>the following week</td>
+                    </tr>
+                    <tr>
+                      <td>last week</td>
+                      <td>the week before</td>
+                    </tr>
+                    <tr>
+                      <td>ago</td>
+                      <td>before</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📍</div>
+                Đổi trạng từ nơi chốn
+              </div>
+              <div class="table-container">
+                <table class="change-table">
+                  <thead>
+                    <tr>
+                      <th>Trực tiếp</th>
+                      <th>Tường thuật</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>here</td>
+                      <td>there</td>
+                    </tr>
+                    <tr>
+                      <td>this</td>
+                      <td>that</td>
+                    </tr>
+                    <tr>
+                      <td>these</td>
+                      <td>those</td>
+                    </tr>
+                    <tr>
+                      <td>come</td>
+                      <td>go</td>
+                    </tr>
+                    <tr>
+                      <td>bring</td>
+                      <td>take</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Ví dụ tổng hợp
+              </div>
+              <div class="example">
+                <strong>Trực tiếp:</strong> "I will see you here tomorrow."<br />
+                <strong>Tường thuật:</strong> He said he would see me there the
+                next day.<br /><br />
+
+                <strong>Trực tiếp:</strong> "We are studying this lesson
+                now."<br />
+                <strong>Tường thuật:</strong> They said they were studying that
+                lesson then.<br /><br />
+
+                <strong>Trực tiếp:</strong> "I bought these books yesterday."<br />
+                <strong>Tường thuật:</strong> She said she had bought those
+                books the day before.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUYỆN TẬP -->
+        <div class="section" id="practice">
+          <h2 class="section-title">✍️ LUYỆN TẬP CÂU TƯỜNG THUẬT</h2>
+
+          <div class="practice-container">
+            <div class="practice-question">
+              <p>
+                <strong>Câu 1:</strong> Chuyển câu trực tiếp sau sang câu tường
+                thuật: "I am reading a book," she said.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer1"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(1, 'She said she was reading a book.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result1"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 2:</strong> Chuyển câu trực tiếp sau sang câu tường
+                thuật: "Where do you live?" he asked me.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer2"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(2, 'He asked me where I lived.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result2"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 3:</strong> Chuyển câu trực tiếp sau sang câu tường
+                thuật: "Don't touch that button!" he told her.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer3"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(3, 'He told her not to touch that button.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result3"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 4:</strong> Chuyển câu trực tiếp sau sang câu tường
+                thuật: "I will call you tomorrow," she promised.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer4"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(4, 'She promised she would call me the next day.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result4"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 5:</strong> Chuyển câu trực tiếp sau sang câu tường
+                thuật: "We have finished our homework," they said.
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer5"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(5, 'They said they had finished their homework.')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result5"></div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📝 Mẹo làm bài:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>Luôn nhớ lùi thì của động từ</li>
+              <li>Chú ý đổi đại từ cho phù hợp với ngữ cảnh</li>
+              <li>Đổi các trạng từ chỉ thời gian và nơi chốn</li>
+              <li>Với câu hỏi, nhớ đổi về dạng khẳng định</li>
+              <li>
+                Với câu mệnh lệnh, sử dụng cấu trúc "to V" hoặc "not to V"
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showSection(sectionId) {
+        // Ẩn tất cả các section
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Hiển thị section được chọn
+        document.getElementById(sectionId).classList.add("active");
+
+        // Cập nhật trạng thái active cho nút
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Tìm nút tương ứng với section được chọn và thêm class active
+        document
+          .querySelector(`.nav-btn[onclick="showSection('${sectionId}')"]`)
+          .classList.add("active");
+      }
+
+      function checkAnswer(questionNum, correctAnswer) {
+        const userAnswer = document
+          .getElementById(`answer${questionNum}`)
+          .value.trim();
+        const resultElement = document.getElementById(`result${questionNum}`);
+
+        // Chuẩn hóa câu trả lời: bỏ khoảng trắng thừa, chuyển về chữ thường
+        const normalizedUserAnswer = userAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ");
+        const normalizedCorrectAnswer = correctAnswer
+          .toLowerCase()
+          .replace(/\s+/g, " ");
+
+        if (normalizedUserAnswer === normalizedCorrectAnswer) {
+          resultElement.textContent = "✓ Chính xác! Câu trả lời của Em đúng.";
+          resultElement.className = "result-feedback correct";
+        } else {
+          resultElement.textContent = `✗ Chưa chính xác. Đáp án đúng là: "${correctAnswer}"`;
+          resultElement.className = "result-feedback incorrect";
+        }
+
+        resultElement.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Câu so sánh - Comparisons</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        color: #333;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.98);
+        min-height: 100vh;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        color: white;
+        padding: 70px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="4" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 10s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .hero-subtitle {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        position: relative;
+      }
+
+      .nav-section {
+        background: white;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .nav-btn {
+        padding: 14px 16px;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        color: #333;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4);
+        background: linear-gradient(135deg, #fad0c4, #ff9a9e);
+      }
+
+      .content-section {
+        padding: 40px;
+      }
+
+      .section {
+        display: none;
+        animation: slideIn 0.5s ease;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        border-radius: 2px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .content-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid #ff9a9e;
+      }
+
+      .content-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card-icon {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+
+      .formula {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 1.1rem;
+        color: #333;
+        border-left: 4px solid #ff9a9e;
+        margin: 15px 0;
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .example {
+        background: #e8f4fd;
+        border-left: 4px solid #4facfe;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+        font-style: italic;
+      }
+
+      .rule-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 5px solid #e17055;
+      }
+
+      .rule-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin: 25px 0;
+      }
+
+      .change-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .change-table th {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .change-table td {
+        padding: 15px;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .change-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .important-note {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #155724;
+      }
+
+      .warning-note {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        border: 2px solid #dc3545;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #721c24;
+      }
+
+      .quick-reference {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        border-left: 6px solid #2196f3;
+      }
+
+      .quick-reference h3 {
+        color: #1976d2;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+      }
+
+      .practice-container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .practice-question {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .practice-question:last-child {
+        border-bottom: none;
+      }
+
+      .practice-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .practice-input:focus {
+        border-color: #ff9a9e;
+        outline: none;
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #00b894, #00cec9);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 15px;
+        transition: all 0.3s;
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+      }
+
+      .result-feedback {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+      }
+
+      .correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(255, 154, 158, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-section {
+          padding: 20px;
+        }
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-title {
+          font-size: 2rem;
+        }
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-section">
+        <h1 class="hero-title">⚖️ CÂU SO SÁNH</h1>
+        <p class="hero-subtitle">
+          Comparisons - Học một cách dễ hiểu và đầy đủ
+        </p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-grid">
+          <button class="nav-btn active" onclick="showSection('overview')">
+            📖 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('equal')">
+            🟰 So sánh bằng
+          </button>
+          <button class="nav-btn" onclick="showSection('comparative')">
+            📈 So sánh hơn
+          </button>
+          <button class="nav-btn" onclick="showSection('superlative')">
+            🏆 So sánh nhất
+          </button>
+          <button class="nav-btn" onclick="showSection('special')">
+            ⭐ Đặc biệt
+          </button>
+          <button class="nav-btn" onclick="showSection('practice')">
+            ✍️ Luyện tập
+          </button>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <!-- TỔNG QUAN -->
+        <div class="section active" id="overview">
+          <h2 class="section-title">📖 TỔNG QUAN VỀ CÂU SO SÁNH</h2>
+
+          <div class="quick-reference">
+            <h3>🎯 Câu so sánh là gì?</h3>
+            <p>
+              <strong>Câu so sánh (Comparisons)</strong> được sử dụng để so sánh
+              giữa hai hoặc nhiều người, sự vật, sự việc, hiện tượng. Có ba loại
+              so sánh chính: so sánh bằng, so sánh hơn và so sánh nhất.
+            </p>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🟰</div>
+                So sánh bằng
+              </div>
+              <div class="formula">
+                <strong>as + adjective/adverb + as</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She is as tall as her brother.<br />
+                • He runs as fast as a horse.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📈</div>
+                So sánh hơn
+              </div>
+              <div class="formula">
+                <strong>adjective/adverb + -er + than</strong><br />
+                <strong>more + adjective/adverb + than</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She is taller than her brother.<br />
+                • This book is more interesting than that one.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🏆</div>
+                So sánh nhất
+              </div>
+              <div class="formula">
+                <strong>the + adjective/adverb + -est</strong><br />
+                <strong>the most + adjective/adverb</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She is the tallest in her class.<br />
+                • This is the most interesting book I've ever read.
+              </div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📌 Quy tắc chung:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>
+                Tính từ/trạng từ ngắn: thêm -er (so sánh hơn) và -est (so sánh
+                nhất)
+              </li>
+              <li>
+                Tính từ/trạng từ dài: dùng more (so sánh hơn) và most (so sánh
+                nhất)
+              </li>
+              <li>
+                Một số tính từ/trạng từ bất quy tắc có dạng so sánh đặc biệt
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SO SÁNH BẰNG -->
+        <div class="section" id="equal">
+          <h2 class="section-title">🟰 SO SÁNH BẰNG</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="formula">
+                <strong>Khẳng định:</strong> S + V + as + adj/adv + as +
+                N/Pronoun<br />
+                <strong>Phủ định:</strong> S + V + not + as/so + adj/adv + as +
+                N/Pronoun
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She is as intelligent as her sister.<br />
+                • He doesn't run as fast as me.<br />
+                • This car is not so expensive as that one.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Cách sử dụng
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">So sánh bằng dùng để:</div>
+                • So sánh hai người, vật, sự việc ngang bằng nhau<br />
+                • Diễn tả sự tương đồng về đặc điểm, tính chất<br />
+                • Chỉ ra sự không khác biệt giữa hai đối tượng
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • My house is as big as yours.<br />
+                • He speaks English as fluently as a native speaker.<br />
+                • This exercise is not as difficult as I thought.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔍</div>
+                Cấu trúc mở rộng
+              </div>
+              <div class="formula">
+                <strong>as + much/many + noun + as</strong><br />
+                <strong>as + little/few + noun + as</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She has as many books as her brother.<br />
+                • He earns as much money as I do.<br />
+                • There are as few students in this class as in that one.<br />
+                • We have as little time as they do.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Lưu ý quan trọng
+              </div>
+              <div class="warning-note">
+                <strong>Chú ý:</strong><br /><br />
+                • "As" thứ hai không bao giờ được thay thế bằng "that"<br />
+                • Có thể dùng "so" thay cho "as" trong câu phủ định<br />
+                • Đảm bảo tính từ/trạng từ ở dạng nguyên thể (không chia)
+              </div>
+              <div class="example">
+                <strong>Ví dụ ĐÚNG:</strong> She is as tall as her mother.<br />
+                <strong>Ví dụ SAI:</strong> She is as tall that her mother.<br />
+                <strong>Ví dụ SAI:</strong> She is as taller as her mother.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SO SÁNH HƠN -->
+        <div class="section" id="comparative">
+          <h2 class="section-title">📈 SO SÁNH HƠN</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="formula">
+                <strong>Tính từ/trạng từ ngắn:</strong> S + V + adj/adv + -er +
+                than<br />
+                <strong>Tính từ/trạng từ dài:</strong> S + V + more + adj/adv +
+                than
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She is taller than her sister.<br />
+                • This book is more interesting than that one.<br />
+                • He runs faster than me.<br />
+                • She speaks more clearly than her brother.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Cách sử dụng
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">So sánh hơn dùng để:</div>
+                • So sánh giữa hai người, vật, sự việc<br />
+                • Chỉ ra sự khác biệt về mức độ, tính chất<br />
+                • Diễn tả một đối tượng có đặc điểm vượt trội hơn đối tượng khác
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Today is hotter than yesterday.<br />
+                • My car is more expensive than yours.<br />
+                • She works harder than her colleagues.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📏</div>
+                Quy tắc thêm -er
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">
+                  Với tính từ/trạng từ ngắn (1-2 âm tiết):
+                </div>
+                • Thông thường: thêm -er (tall → taller)<br />
+                • Kết thúc bằng -e: chỉ thêm -r (large → larger)<br />
+                • Kết thúc bằng phụ âm + nguyên âm + phụ âm: gấp đôi phụ âm cuối
+                (big → bigger)<br />
+                • Kết thúc bằng -y: đổi -y thành -i rồi thêm -er (happy →
+                happier)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • fast → faster<br />
+                • nice → nicer<br />
+                • hot → hotter<br />
+                • easy → easier
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📚</div>
+                Tính từ/trạng từ dài
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">
+                  Với tính từ/trạng từ dài (3+ âm tiết):
+                </div>
+                • Dùng "more" cho so sánh hơn<br />
+                • Dùng "most" cho so sánh nhất<br />
+                • Một số tính từ 2 âm tiết cũng dùng "more"
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • beautiful → more beautiful<br />
+                • difficult → more difficult<br />
+                • carefully → more carefully<br />
+                • famous → more famous (2 âm tiết)
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                So sánh kép (Double Comparative)
+              </div>
+              <div class="formula">
+                <strong
+                  >The + comparative + S + V, the + comparative + S + V</strong
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The older I get, the happier I am.<br />
+                • The more you study, the smarter you become.<br />
+                • The more expensive the hotel is, the better the service.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📊</div>
+                So sánh hơn kém
+              </div>
+              <div class="formula">
+                <strong>less + adjective/adverb + than</strong> (ít hơn)<br />
+                <strong>not as/so + adjective/adverb + as</strong> (không bằng)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • This movie is less interesting than that one.<br />
+                • He is less intelligent than his brother.<br />
+                • She is not as tall as her mother.<br />
+                • This car is not so expensive as that one.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SO SÁNH NHẤT -->
+        <div class="section" id="superlative">
+          <h2 class="section-title">🏆 SO SÁNH NHẤT</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Cấu trúc cơ bản
+              </div>
+              <div class="formula">
+                <strong>Tính từ/trạng từ ngắn:</strong> S + V + the + adj/adv +
+                -est<br />
+                <strong>Tính từ/trạng từ dài:</strong> S + V + the most +
+                adj/adv
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She is the tallest girl in the class.<br />
+                • This is the most interesting book I've ever read.<br />
+                • He runs the fastest in the team.<br />
+                • That was the most beautifully decorated room.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🎯</div>
+                Cách sử dụng
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">So sánh nhất dùng để:</div>
+                • So sánh một người/vật với tất cả những người/vật khác trong
+                nhóm<br />
+                • Chỉ ra đối tượng có đặc điểm ở mức độ cao nhất<br />
+                • Thường đi với cụm từ chỉ phạm vi (in, of, among...)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • Mount Everest is the highest mountain in the world.<br />
+                • She is the most intelligent student in our class.<br />
+                • This is the best movie of the year.<br />
+                • He is the tallest among his friends.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📏</div>
+                Quy tắc thêm -est
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">
+                  Với tính từ/trạng từ ngắn (1-2 âm tiết):
+                </div>
+                • Thông thường: thêm -est (tall → tallest)<br />
+                • Kết thúc bằng -e: chỉ thêm -st (large → largest)<br />
+                • Kết thúc bằng phụ âm + nguyên âm + phụ âm: gấp đôi phụ âm cuối
+                (big → biggest)<br />
+                • Kết thúc bằng -y: đổi -y thành -i rồi thêm -est (happy →
+                happiest)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • fast → fastest<br />
+                • nice → nicest<br />
+                • hot → hottest<br />
+                • easy → easiest
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📚</div>
+                Tính từ/trạng từ dài
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">
+                  Với tính từ/trạng từ dài (3+ âm tiết):
+                </div>
+                • Dùng "the most" cho so sánh nhất<br />
+                • Một số tính từ 2 âm tiết cũng dùng "the most"<br />
+                • Dùng "the least" cho so sánh kém nhất
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • beautiful → the most beautiful<br />
+                • difficult → the most difficult<br />
+                • famous → the most famous (2 âm tiết)<br />
+                • interesting → the least interesting
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Một số lưu ý quan trọng
+              </div>
+              <div class="warning-note">
+                <strong>Chú ý khi dùng so sánh nhất:</strong><br /><br />
+                • Luôn có "the" trước tính từ/trạng từ ở dạng so sánh nhất<br />
+                • Thường có cụm từ chỉ phạm vi (in, of, among...)<br />
+                • Không dùng "than" với so sánh nhất<br />
+                • Một số tính từ không có dạng so sánh (unique, perfect,
+                dead...)
+              </div>
+              <div class="example">
+                <strong>Ví dụ ĐÚNG:</strong> She is the most beautiful girl in
+                the class.<br />
+                <strong>Ví dụ SAI:</strong> She is most beautiful girl in the
+                class.<br />
+                <strong>Ví dụ SAI:</strong> She is the most beautiful than other
+                girls.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔍</div>
+                So sánh nhất với giới từ
+              </div>
+              <div class="formula">
+                <strong>in:</strong> dùng cho địa điểm, tổ chức, thời gian
+                (lớn)<br />
+                <strong>of/among:</strong> dùng cho nhóm người/vật<br />
+                <strong>that:</strong> dùng cho mệnh đề quan hệ
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • He is the tallest in his family.<br />
+                • This is the most interesting of all the books.<br />
+                • She is the smartest among the students.<br />
+                • This is the best book that I have ever read.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SO SÁNH ĐẶC BIỆT -->
+        <div class="section" id="special">
+          <h2 class="section-title">⭐ SO SÁNH ĐẶC BIỆT</h2>
+
+          <div class="table-container">
+            <table class="change-table">
+              <thead>
+                <tr>
+                  <th>Tính từ/Trạng từ</th>
+                  <th>So sánh hơn</th>
+                  <th>So sánh nhất</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>good/well</td>
+                  <td>better</td>
+                  <td>best</td>
+                </tr>
+                <tr>
+                  <td>bad/badly</td>
+                  <td>worse</td>
+                  <td>worst</td>
+                </tr>
+                <tr>
+                  <td>far</td>
+                  <td>farther/further</td>
+                  <td>farthest/furthest</td>
+                </tr>
+                <tr>
+                  <td>much/many</td>
+                  <td>more</td>
+                  <td>most</td>
+                </tr>
+                <tr>
+                  <td>little</td>
+                  <td>less</td>
+                  <td>least</td>
+                </tr>
+                <tr>
+                  <td>old</td>
+                  <td>older/elder</td>
+                  <td>oldest/eldest</td>
+                </tr>
+                <tr>
+                  <td>late</td>
+                  <td>later/latter</td>
+                  <td>latest/last</td>
+                </tr>
+                <tr>
+                  <td>near</td>
+                  <td>nearer</td>
+                  <td>nearest/next</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔀</div>
+                So sánh kép (Double Comparative)
+              </div>
+              <div class="formula">
+                <strong
+                  >The + comparative + S + V, the + comparative + S + V</strong
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The more you practice, the better you become.<br />
+                • The older I get, the wiser I become.<br />
+                • The more expensive the car, the more comfortable it is.<br />
+                • The sooner you start, the sooner you finish.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                So sánh lặp (Repeated Comparative)
+              </div>
+              <div class="formula">
+                <strong
+                  >Short adj/adv: S + V + adj/adv + er + and + adj/adv +
+                  er</strong
+                ><br />
+                <strong>Long adj/adv: S + V + more and more + adj/adv</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • The weather gets colder and colder.<br />
+                • She becomes more and more beautiful.<br />
+                • He runs faster and faster.<br />
+                • The situation became more and more complicated.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Các dạng so sánh đặc biệt khác
+              </div>
+              <div class="formula">
+                <strong>So sánh gấp bội:</strong> S + V + bội số + as +
+                much/many/adj/adv + as<br />
+                <strong>So sánh kép với danh từ:</strong> The + more + noun + S
+                + V, the + more + noun + S + V
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • This house is twice as big as that one.<br />
+                • He earns three times as much as I do.<br />
+                • The more money he makes, the more problems he has.<br />
+                • The more experience you have, the more opportunities you get.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Những tính từ không có dạng so sánh
+              </div>
+              <div class="warning-note">
+                <strong
+                  >Một số tính từ không dùng ở dạng so sánh vì đã thể hiện mức
+                  độ tuyệt đối:</strong
+                ><br /><br />
+                • unique (duy nhất)<br />
+                • perfect (hoàn hảo)<br />
+                • dead (chết)<br />
+                • eternal (vĩnh cửu)<br />
+                • absolute (tuyệt đối)<br />
+                • supreme (tối cao)<br />
+                • empty (trống rỗng)<br />
+                • full (đầy)
+              </div>
+              <div class="example">
+                <strong>Ví dụ ĐÚNG:</strong> This painting is unique.<br />
+                <strong>Ví dụ SAI:</strong> This painting is more unique than
+                that one.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUYỆN TẬP -->
+        <div class="section" id="practice">
+          <h2 class="section-title">✍️ LUYỆN TẬP</h2>
+
+          <div class="practice-container">
+            <div class="practice-question">
+              <p>
+                <strong>Câu 1:</strong> Chọn đáp án đúng: "She is ______ than
+                her sister."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="q1"
+                placeholder="Điền đáp án của Em"
+              />
+              <button class="check-btn" onclick="checkAnswer(1, 'taller')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result1"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 2:</strong> Hoàn thành câu: "This is ______
+                (interesting) book I have ever read."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="q2"
+                placeholder="Điền đáp án của Em"
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(2, 'the most interesting')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result2"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 3:</strong> Viết lại câu sử dụng so sánh bằng: "My
+                car isn't as expensive as your car."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="q3"
+                placeholder="Điền đáp án của Em"
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(3, 'Your car is more expensive than my car')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result3"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 4:</strong> Chia dạng đúng của từ: "He runs (fast)
+                ______ than me."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="q4"
+                placeholder="Điền đáp án của Em"
+              />
+              <button class="check-btn" onclick="checkAnswer(4, 'faster')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result4"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 5:</strong> Hoàn thành câu so sánh kép: "______ you
+                practice, ______ you become."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="q5"
+                placeholder="Điền đáp án của Em"
+              />
+              <button
+                class="check-btn"
+                onclick="checkAnswer(5, 'The more, the better')"
+              >
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result5"></div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📝 Mẹo làm bài:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>Xác định xem câu cần loại so sánh nào (bằng, hơn, nhất)</li>
+              <li>Nhận biết tính từ/trạng từ ngắn hay dài để chia đúng dạng</li>
+              <li>Chú ý các trường hợp bất quy tắc</li>
+              <li>Kiểm tra lại cấu trúc câu đã đầy đủ chưa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <button class="back-to-top" onclick="scrollToTop()">↑</button>
+    </div>
+
+    <script>
+      // Hiển thị section được chọn
+      function showSection(sectionId) {
+        // Ẩn tất cả các section
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Hiển thị section được chọn
+        document.getElementById(sectionId).classList.add("active");
+
+        // Cập nhật trạng thái active cho nút
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Thêm class active cho nút được click (dựa trên sectionId)
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          if (btn.getAttribute("onclick").includes(sectionId)) {
+            btn.classList.add("active");
+          }
+        });
+
+        // Cuộn lên đầu trang
+        scrollToTop();
+      }
+
+      // Cuộn lên đầu trang
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // Hiển thị nút back to top khi cuộn
+      window.onscroll = function () {
+        const backToTopBtn = document.querySelector(".back-to-top");
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          backToTopBtn.classList.add("show");
+        } else {
+          backToTopBtn.classList.remove("show");
+        }
+      };
+
+      // Kiểm tra câu trả lời
+      function checkAnswer(questionNum, correctAnswer) {
+        const userAnswer = document
+          .getElementById("q" + questionNum)
+          .value.trim()
+          .toLowerCase();
+        const resultElement = document.getElementById("result" + questionNum);
+
+        if (userAnswer === correctAnswer.toLowerCase()) {
+          resultElement.innerHTML = "✅ Chính xác! Đáp án đúng.";
+          resultElement.className = "result-feedback correct";
+        } else {
+          resultElement.innerHTML =
+            "❌ Chưa chính xác. Đáp án đúng là: <strong>" +
+            correctAnswer +
+            "</strong>";
+          resultElement.className = "result-feedback incorrect";
+        }
+
+        resultElement.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

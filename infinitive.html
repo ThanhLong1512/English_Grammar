@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerund và Infinitive</title>
+    <style>
+      /* CSS đã có ở trên */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: #333;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.98);
+        min-height: 100vh;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 70px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="4" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 10s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .hero-subtitle {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        position: relative;
+      }
+
+      .nav-section {
+        background: white;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .nav-btn {
+        padding: 14px 16px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 8px 25px rgba(106, 17, 203, 0.4);
+        background: linear-gradient(135deg, #2575fc, #6a11cb);
+      }
+
+      .content-section {
+        padding: 40px;
+      }
+
+      .section {
+        display: none;
+        animation: slideIn 0.5s ease;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border-radius: 2px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .content-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid #6a11cb;
+      }
+
+      .content-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card-icon {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+
+      .formula {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 1.1rem;
+        color: #333;
+        border-left: 4px solid #6a11cb;
+        margin: 15px 0;
+      }
+
+      .highlight {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .example {
+        background: #e8f4fd;
+        border-left: 4px solid #2575fc;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+        font-style: italic;
+      }
+
+      .rule-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 5px solid #e17055;
+      }
+
+      .rule-title {
+        font-weight: bold;
+        color: #d63031;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin: 25px 0;
+      }
+
+      .change-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .change-table th {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .change-table td {
+        padding: 15px;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .change-table tr:hover {
+        background: #f8f9fa;
+      }
+
+      .important-note {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #155724;
+      }
+
+      .warning-note {
+        background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+        border: 2px solid #dc3545;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        color: #721c24;
+      }
+
+      .quick-reference {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 30px 0;
+        border-left: 6px solid #2196f3;
+      }
+
+      .quick-reference h3 {
+        color: #1976d2;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+      }
+
+      .practice-container {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .practice-question {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .practice-question:last-child {
+        border-bottom: none;
+      }
+
+      .practice-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .practice-input:focus {
+        border-color: #6a11cb;
+        outline: none;
+      }
+
+      .check-btn {
+        background: linear-gradient(135deg, #00b894, #00cec9);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 15px;
+        transition: all 0.3s;
+      }
+
+      .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+      }
+
+      .result-feedback {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+      }
+
+      .correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 8px 25px rgba(106, 17, 203, 0.4);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(106, 17, 203, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-section {
+          padding: 20px;
+        }
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-title {
+          font-size: 2rem;
+        }
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-section">
+        <h1 class="hero-title">🔄 GERUND & INFINITIVE</h1>
+        <p class="hero-subtitle">
+          Động từ nguyên thể và Danh động từ - Học một cách dễ hiểu và đầy đủ
+        </p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-grid">
+          <button class="nav-btn active" onclick="showSection('overview')">
+            📖 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('gerund')">
+            🎯 Gerund
+          </button>
+          <button class="nav-btn" onclick="showSection('infinitive')">
+            🎯 Infinitive
+          </button>
+          <button class="nav-btn" onclick="showSection('difference')">
+            🔍 So sánh
+          </button>
+          <button class="nav-btn" onclick="showSection('special')">
+            ⭐ Đặc biệt
+          </button>
+          <button class="nav-btn" onclick="showSection('practice')">
+            ✍️ Luyện tập
+          </button>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <!-- TỔNG QUAN -->
+        <div class="section active" id="overview">
+          <h2 class="section-title">📖 TỔNG QUAN VỀ GERUND & INFINITIVE</h2>
+
+          <div class="quick-reference">
+            <h3>🎯 Gerund và Infinitive là gì?</h3>
+            <p>
+              <strong>Gerund (Danh động từ)</strong> là hình thức động từ thêm
+              -ing và được sử dụng như một danh từ.<br />
+              <strong>Infinitive (Động từ nguyên thể)</strong> là hình thức cơ
+              bản của động từ, thường có "to" đứng trước.
+            </p>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                So sánh Gerund và Infinitive
+              </div>
+              <div class="formula">
+                <strong>Gerund:</strong> V + ing (swimming, reading)<br />
+                <strong>Infinitive:</strong> to + V (to swim, to read)
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I enjoy <span class="highlight">swimming</span>.<br />
+                • I want <span class="highlight">to swim</span>.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Vai trò trong câu
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Gerund có thể làm:</div>
+                • Chủ ngữ: <em>Swimming is good exercise.</em><br />
+                • Tân ngữ: <em>I enjoy swimming.</em><br />
+                • Bổ ngữ: <em>My hobby is swimming.</em>
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Infinitive có thể làm:</div>
+                • Chủ ngữ: <em>To err is human.</em><br />
+                • Tân ngữ: <em>I want to leave.</em><br />
+                • Bổ ngữ: <em>My dream is to travel.</em>
+              </div>
+            </div>
+          </div>
+
+          <div class="important-note">
+            <strong>📌 Khi nào dùng Gerund, khi nào dùng Infinitive:</strong>
+            <ul style="margin-top: 10px; padding-left: 20px">
+              <li>
+                Một số động từ chỉ đi với Gerund (enjoy, avoid, consider...)
+              </li>
+              <li>
+                Một số động từ chỉ đi với Infinitive (want, decide, plan...)
+              </li>
+              <li>
+                Một số động từ đi được với cả hai nhưng nghĩa khác nhau (stop,
+                remember, forget...)
+              </li>
+              <li>Một số động từ đặc biệt (make, let, help...)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- GERUND -->
+        <div class="section" id="gerund">
+          <h2 class="section-title">🎯 GERUND (DANH ĐỘNG TỪ)</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔧</div>
+                Cách thành lập
+              </div>
+              <div class="formula">
+                <strong>V + ing = Gerund</strong>
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Quy tắc thêm -ing:</div>
+                • Hầu hết động từ: thêm -ing (work → working)<br />
+                • Động từ kết thúc bằng -e: bỏ -e rồi thêm -ing (write →
+                writing)<br />
+                • Động từ 1 âm tiết kết thúc bằng 1 phụ âm: nhân đôi phụ âm (run
+                → running)<br />
+                • Động từ kết thúc bằng -ie: đổi thành -y (lie → lying)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📋</div>
+                Động từ theo sau bởi Gerund
+              </div>
+              <div class="example">
+                <strong>Một số động từ phổ biến:</strong><br />
+                • admit, avoid, consider, delay, deny, enjoy, finish, imagine,
+                miss, postpone, practice, quit, recommend, risk, suggest
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • He admitted <span class="highlight">breaking</span> the
+                window.<br />
+                • I enjoy <span class="highlight">reading</span> books.<br />
+                • She suggested <span class="highlight">going</span> to the
+                cinema.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Các trường hợp đặc biệt
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Giới từ + Gerund:</div>
+                • Sau giới từ (in, on, at, of, about, with...), chúng ta dùng
+                Gerund
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I'm thinking <span class="highlight">about buying</span> a new
+                car.<br />
+                • She's good
+                <span class="highlight">at speaking</span> English.<br />
+                • He left without <span class="highlight">saying</span> goodbye.
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔍</div>
+                Cụm động từ + Gerund
+              </div>
+              <div class="formula">
+                <strong>Phrasal verbs + Gerund</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I'm looking forward to
+                <span class="highlight">seeing</span> you.<br />
+                • She ended up
+                <span class="highlight">staying</span> home.<br />
+                • He gave up <span class="highlight">smoking</span> last year.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Cụm động từ phổ biến:</div>
+                look forward to, give up, put off, keep on, end up, go on
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INFINITIVE -->
+        <div class="section" id="infinitive">
+          <h2 class="section-title">🎯 INFINITIVE (ĐỘNG TỪ NGUYÊN THỂ)</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔧</div>
+                Các dạng Infinitive
+              </div>
+              <div class="formula">
+                <strong>to + V = To-infinitive</strong><br />
+                <strong>V = Bare infinitive</strong>
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Các hình thức Infinitive:</div>
+                • Simple: to do<br />
+                • Continuous: to be doing<br />
+                • Perfect: to have done<br />
+                • Perfect continuous: to have been doing<br />
+                • Passive: to be done
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📋</div>
+                Động từ theo sau bởi Infinitive
+              </div>
+              <div class="example">
+                <strong>Một số động từ phổ biến:</strong><br />
+                • afford, agree, appear, arrange, ask, decide, expect, hope,
+                learn, manage, offer, plan, promise, refuse, seem, want, wish
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She decided
+                <span class="highlight">to study</span> abroad.<br />
+                • He promised <span class="highlight">to help</span> me.<br />
+                • They hope <span class="highlight">to win</span> the game.
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Động từ + tân ngữ + Infinitive
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Cấu trúc:</div>
+                • S + V + O + to-infinitive
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • She asked me <span class="highlight">to help</span> her.<br />
+                • I want you <span class="highlight">to finish</span> this
+                work.<br />
+                • He advised her <span class="highlight">to see</span> a doctor.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Động từ thường gặp:</div>
+                advise, allow, ask, encourage, expect, invite, order, remind,
+                tell, want, warn
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔍</div>
+                Bare Infinitive (Động từ nguyên thể không "to")
+              </div>
+              <div class="formula">
+                <strong
+                  >Sau động từ khuyết thiếu và một số động từ đặc biệt</strong
+                >
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • You should <span class="highlight">study</span> harder.<br />
+                • I must <span class="highlight">go</span> now.<br />
+                • She let me <span class="highlight">use</span> her computer.<br />
+                • We heard him <span class="highlight">sing</span>.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Sau các động từ:</div>
+                modal verbs, let, make, help, see, hear, feel, watch, notice
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SO SÁNH -->
+        <div class="section" id="difference">
+          <h2 class="section-title">🔍 SO SÁNH GERUND VÀ INFINITIVE</h2>
+
+          <div class="table-container">
+            <table class="change-table">
+              <thead>
+                <tr>
+                  <th>Động từ</th>
+                  <th>Gerund</th>
+                  <th>Infinitive</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>remember</td>
+                  <td>nhớ đã làm gì (trong quá khứ)</td>
+                  <td>nhớ để làm gì (trong tương lai)</td>
+                </tr>
+                <tr>
+                  <td>forget</td>
+                  <td>quên đã làm gì (trong quá khứ)</td>
+                  <td>quên để làm gì (trong tương lai)</td>
+                </tr>
+                <tr>
+                  <td>stop</td>
+                  <td>dừng việc đang làm</td>
+                  <td>dừng lại để làm việc khác</td>
+                </tr>
+                <tr>
+                  <td>try</td>
+                  <td>thử làm gì</td>
+                  <td>cố gắng làm gì</td>
+                </tr>
+                <tr>
+                  <td>regret</td>
+                  <td>hối tiếc đã làm gì</td>
+                  <td>thông báo tin xấu</td>
+                </tr>
+                <tr>
+                  <td>mean</td>
+                  <td>có nghĩa là, liên quan đến</td>
+                  <td>dự định, có ý định</td>
+                </tr>
+                <tr>
+                  <td>go on</td>
+                  <td>tiếp tục làm việc gì</td>
+                  <td>chuyển sang làm việc khác</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">📝</div>
+                Ví dụ chi tiết
+              </div>
+              <div class="example">
+                <strong>Remember:</strong><br />
+                • I remember <span class="highlight">locking</span> the door.
+                (Tôi nhớ đã khóa cửa)<br />
+                • Remember <span class="highlight">to lock</span> the door. (Nhớ
+                khóa cửa nhé)<br /><br />
+
+                <strong>Stop:</strong><br />
+                • He stopped <span class="highlight">smoking</span>. (Anh ấy đã
+                dừng hút thuốc)<br />
+                • He stopped <span class="highlight">to smoke</span>. (Anh ấy
+                dừng lại để hút thuốc)<br /><br />
+
+                <strong>Try:</strong><br />
+                • I tried <span class="highlight">opening</span> the window.
+                (Tôi thử mở cửa sổ)<br />
+                • I tried <span class="highlight">to open</span> the window.
+                (Tôi cố gắng mở cửa sổ)
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Một số lưu ý quan trọng
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Các trường hợp dễ nhầm lẫn:</div>
+                • Một số động từ có thể đi với cả Gerund và Infinitive mà không
+                thay đổi nghĩa: begin, start, continue, like, love, prefer, hate
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • It started <span class="highlight">raining</span>.<br />
+                • It started <span class="highlight">to rain</span>.<br />
+                → Cả hai đều đúng và có nghĩa tương tự
+              </div>
+              <div class="warning-note">
+                <strong>Chú ý:</strong> Với would like, would love, would
+                prefer, chúng ta chỉ dùng Infinitive: I would like to go now.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ĐẶC BIỆT -->
+        <div class="section" id="special">
+          <h2 class="section-title">⭐ CẤU TRÚC ĐẶC BIỆT</h2>
+
+          <div class="content-grid">
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔠</div>
+                Tính từ + Infinitive
+              </div>
+              <div class="formula">
+                <strong>S + be + adjective + to-infinitive</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I'm happy <span class="highlight">to see</span> you.<br />
+                • She was surprised <span class="highlight">to hear</span> the
+                news.<br />
+                • It's important
+                <span class="highlight">to study</span> regularly.<br />
+                • He's ready <span class="highlight">to leave</span>.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Tính từ thường gặp:</div>
+                happy, glad, pleased, surprised, amazed, sorry, sad, eager,
+                ready, willing, likely, certain, sure, important, necessary,
+                easy, difficult, hard
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">🔄</div>
+                Danh từ + Infinitive
+              </div>
+              <div class="formula">
+                <strong>S + have + noun + to-infinitive</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I have homework <span class="highlight">to do</span>.<br />
+                • She has a meeting
+                <span class="highlight">to attend</span>.<br />
+                • We need a place <span class="highlight">to stay</span>.<br />
+                • He wants something <span class="highlight">to drink</span>.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Cấu trúc phổ biến:</div>
+                • have something to do<br />
+                • need something to do<br />
+                • want something to do<br />
+                • look for something to do
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">❓</div>
+                Câu hỏi với What, Where, How...
+              </div>
+              <div class="formula">
+                <strong>Wh-word + to-infinitive</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • I don't know <span class="highlight">what to do</span>.<br />
+                • She can't decide
+                <span class="highlight">where to go</span>.<br />
+                • Tell me <span class="highlight">how to use</span> this.<br />
+                • We need to know <span class="highlight">when to start</span>.
+              </div>
+              <div class="rule-box">
+                <div class="rule-title">Các từ để hỏi thường dùng:</div>
+                what, where, when, how, whether, which
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="card-title">
+                <div class="card-icon">⚠️</div>
+                Một số cấu trúc đặc biệt khác
+              </div>
+              <div class="formula">
+                <strong>Too + adjective + to-infinitive</strong><br />
+                <strong>Adjective + enough + to-infinitive</strong>
+              </div>
+              <div class="example">
+                <strong>Ví dụ:</strong><br />
+                • It's too cold
+                <span class="highlight">to go</span> outside.<br />
+                • She's old enough
+                <span class="highlight">to drive</span>.<br />
+                • The box is too heavy
+                <span class="highlight">to lift</span>.<br />
+                • He's strong enough <span class="highlight">to carry</span> it.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUYỆN TẬP -->
+        <div class="section" id="practice">
+          <h2 class="section-title">✍️ LUYỆN TẬP GERUND & INFINITIVE</h2>
+
+          <div class="practice-container">
+            <div class="practice-question">
+              <p>
+                <strong>Câu 1:</strong> Điền dạng đúng của động từ: "I enjoy
+                (read) books in my free time."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer1"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(1, 'reading')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result1"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 2:</strong> Điền dạng đúng của động từ: "She decided
+                (study) abroad next year."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer2"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(2, 'to study')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result2"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 3:</strong> Điền dạng đúng của động từ: "He avoids
+                (eat) junk food."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer3"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(3, 'eating')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result3"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 4:</strong> Điền dạng đúng của động từ: "They want
+                (buy) a new house."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer4"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(4, 'to buy')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result4"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 5:</strong> Điền dạng đúng của động từ: "I remember
+                (visit) this place when I was a child."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer5"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(5, 'visiting')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result5"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 6:</strong> Điền dạng đúng của động từ: "Don't
+                forget (lock) the door before leaving."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer6"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(6, 'to lock')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result6"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 7:</strong> Điền dạng đúng của động từ: "She
+                suggested (go) to the cinema tonight."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer7"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(7, 'going')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result7"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 8:</strong> Điền dạng đúng của động từ: "He promised
+                (help) me with my homework."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer8"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(8, 'to help')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result8"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 9:</strong> Điền dạng đúng của động từ: "We are
+                looking forward to (see) you again."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer9"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(9, 'seeing')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result9"></div>
+            </div>
+
+            <div class="practice-question">
+              <p>
+                <strong>Câu 10:</strong> Điền dạng đúng của động từ: "She made
+                me (clean) my room."
+              </p>
+              <input
+                type="text"
+                class="practice-input"
+                id="answer10"
+                placeholder="Nhập câu trả lời của Em..."
+              />
+              <button class="check-btn" onclick="checkAnswer(10, 'clean')">
+                Kiểm tra
+              </button>
+              <div class="result-feedback" id="result10"></div>
+            </div>
+
+            <button
+              class="check-btn"
+              onclick="checkAllAnswers()"
+              style="margin: 20px auto; display: block"
+            >
+              Kiểm tra tất cả
+            </button>
+
+            <div
+              id="final-result"
+              style="
+                text-align: center;
+                margin-top: 20px;
+                font-weight: bold;
+                font-size: 1.2rem;
+              "
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+      // Hiển thị section được chọn
+      function showSection(sectionId) {
+        // Ẩn tất cả các section
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Hiển thị section được chọn
+        document.getElementById(sectionId).classList.add("active");
+
+        // Cập nhật trạng thái active của nút
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        event.currentTarget.classList.add("active");
+
+        // Cuộn lên đầu section
+        window.scrollTo({
+          top: document.querySelector(".content-section").offsetTop - 20,
+          behavior: "smooth",
+        });
+      }
+
+      // Kiểm tra câu trả lời
+      function checkAnswer(questionNum, correctAnswer) {
+        const userAnswer = document
+          .getElementById(`answer${questionNum}`)
+          .value.trim()
+          .toLowerCase();
+        const resultElement = document.getElementById(`result${questionNum}`);
+
+        if (userAnswer === correctAnswer) {
+          resultElement.textContent = "✅ Chính xác! Câu trả lời của Em đúng.";
+          resultElement.className = "result-feedback correct";
+        } else {
+          resultElement.textContent = `❌ Sai rồi. Đáp án đúng là: ${correctAnswer}`;
+          resultElement.className = "result-feedback incorrect";
+        }
+
+        resultElement.style.display = "block";
+      }
+
+      // Kiểm tra tất cả câu trả lời
+      function checkAllAnswers() {
+        const answers = {
+          1: "reading",
+          2: "to study",
+          3: "eating",
+          4: "to buy",
+          5: "visiting",
+          6: "to lock",
+          7: "going",
+          8: "to help",
+          9: "seeing",
+          10: "clean",
+        };
+
+        let correctCount = 0;
+
+        for (let i = 1; i <= 10; i++) {
+          const userAnswer = document
+            .getElementById(`answer${i}`)
+            .value.trim()
+            .toLowerCase();
+          const resultElement = document.getElementById(`result${i}`);
+
+          if (userAnswer === answers[i]) {
+            resultElement.textContent = "✅ Chính xác!";
+            resultElement.className = "result-feedback correct";
+            correctCount++;
+          } else {
+            resultElement.textContent = `❌ Sai. Đáp án: ${answers[i]}`;
+            resultElement.className = "result-feedback incorrect";
+          }
+
+          resultElement.style.display = "block";
+        }
+
+        const finalResult = document.getElementById("final-result");
+        const percentage = (correctCount / 10) * 100;
+
+        if (percentage >= 80) {
+          finalResult.innerHTML = `🎉 Xuất sắc! Em đúng ${correctCount}/10 câu (${percentage}%)`;
+          finalResult.style.color = "#28a745";
+        } else if (percentage >= 50) {
+          finalResult.innerHTML = `👍 Khá tốt! Em đúng ${correctCount}/10 câu (${percentage}%)`;
+          finalResult.style.color = "#ffc107";
+        } else {
+          finalResult.innerHTML = `😔 Cần cố gắng hơn! Em đúng ${correctCount}/10 câu (${percentage}%)`;
+          finalResult.style.color = "#dc3545";
+        }
+      }
+
+      // Nút back to top
+      window.onscroll = function () {
+        const backToTopButton = document.querySelector(".back-to-top");
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      };
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
